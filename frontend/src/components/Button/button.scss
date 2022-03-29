@@ -1,0 +1,31 @@
+@import '../../SCSS/variables';
+
+.button {
+    color: black;
+    font-size: 17px;
+    border: none;
+    cursor: pointer;
+    padding: 10px 30px;
+    border-radius: 5px;
+    text-transform: uppercase;
+    font-weight: 700;
+    &--primary {
+        background: white;
+        &:hover {
+            background: $secondaryColor
+        }
+    }
+    &--secondary {
+        background: #008000;
+        &:hover {
+            background: lighten(#008000, 5%)
+        }
+    }
+    &--delete {
+        background: #FF0000;
+        &:hover {
+            background: lighten(#FF0000, 15%)
+        }
+    }
+}
+

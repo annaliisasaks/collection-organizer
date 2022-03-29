@@ -1,26 +1,30 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import './App.scss';
+import './SCSS/Main.scss';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Header from './components/Header/Header';
+import HomePage from './Pages/HomePage/HomePage';
+import GalleryPage from './Pages/GalleryPage/GalleryPage';
+import AddUnitPage from './Pages/AddPostPage/AddUnitPage';
+import PostDetailsPage from './Pages/PostDetailsPage/PostDetailsPage';
+import EditPostPage from './Pages/EditPostPage/EditPostPage';
 
-function App() {
-  return (
+const App = ():JSX.Element => (
+  <BrowserRouter>
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header />
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/galerii" element={<GalleryPage />} />
+        <Route path="/kirje/:id" element={<PostDetailsPage />} />
+        <Route path="/kirje/lisa" element={<AddUnitPage />} />
+        <Route path="/kirje/muuda/:id" element={<EditPostPage />} />
+
+      </Routes>
+
     </div>
-  );
-}
+
+  </BrowserRouter>
+);
 
 export default App;

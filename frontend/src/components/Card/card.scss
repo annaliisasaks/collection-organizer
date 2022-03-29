@@ -1,0 +1,28 @@
+@import '../../SCSS/variables';
+
+.card {
+    display: flex;
+    background-color: $primaryColor;
+    padding: 20px 15px;
+    border-radius: 10px;
+    max-width: var(--container-width);
+    box-shadow: 0 2px 5px $primaryColor;
+
+    @media (max-width: 600px) {
+        flex-direction: column;
+    }
+
+    &--white {
+        background-color: $white;
+    }
+
+    &--border-radius-top-none {
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+    }
+
+    &--border-radius-bottom-none {
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+}

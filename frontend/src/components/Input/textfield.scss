@@ -1,0 +1,9 @@
+.textfield {
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+
+    @media (max-width: 600px) {
+        margin-bottom: 10px;
+    }
+}

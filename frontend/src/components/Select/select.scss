@@ -1,0 +1,12 @@
+@import '../../SCSS/variables';
+
+.select {
+    font-size: 16px;
+    padding: 10px;
+    border: none;
+    min-width: 180px;
+
+    @media (max-width: 600px) {
+        margin-bottom: 10px;
+    }
+}

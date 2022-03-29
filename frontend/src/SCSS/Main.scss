@@ -1,0 +1,10 @@
+@import './variables';
+@import './general';
+
+
+.text-success {
+    color:$successColor;
+}
+.text-danger {
+    color:$dangerColor;
+}

@@ -1,0 +1,36 @@
+.list--horizontal {
+    display:flex;
+    flex-direction:row;
+}
+
+.list--vertical {
+  display:flex;
+  flex-direction:column;
+}
+
+.list--full-width {
+  width: 100%;
+  justify-content: space-between;
+}
+
+.list__item {
+  list-style-type: none;
+
+  &::before {
+    color: #696969; 
+  }
+
+  .list--bullets > &:not(:first-child)::before {
+    content:"•";
+    margin: 0 10px;
+  }
+
+  .list--hashtags > &::before {
+    content:"#";
+    margin-left: 10px;
+  }
+
+  .list--hashtags > &:first-child::before {
+    margin-left: 0;
+  }
+}
