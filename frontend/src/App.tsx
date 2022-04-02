@@ -8,6 +8,7 @@ import GalleryPage from './Pages/GalleryPage/GalleryPage';
 import AddUnitPage from './Pages/AddPostPage/AddUnitPage';
 import PostDetailsPage from './Pages/PostDetailsPage/PostDetailsPage';
 import EditPostPage from './Pages/EditPostPage/EditPostPage';
+import ComparePage from './Pages/ComparePage/ComparePage';
 
 const App = ():JSX.Element => (
   <BrowserRouter>
@@ -15,6 +16,7 @@ const App = ():JSX.Element => (
       <Header />
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/vordlus" element={<ComparePage />} />
         <Route path="/galerii" element={<GalleryPage />} />
         <Route path="/kirje/:id" element={<PostDetailsPage />} />
         <Route path="/kirje/lisa" element={<AddUnitPage />} />

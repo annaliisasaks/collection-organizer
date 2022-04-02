@@ -77,7 +77,7 @@ const UnitTable = (props: IUnitTableProps): JSX.Element => {
 
             </TableData>
             <TableData>
-              <Check />
+              <Check id={unit.id} />
 
             </TableData>
 
