@@ -28,7 +28,7 @@ const Select = (props: ISelectProps): JSX.Element => {
     <>
       {hideLabel ? <label htmlFor={name} hidden>{label}</label> : <label htmlFor={name}>{label}</label> }
       <select name={name} className={BEM()}>
-        {options.map((option) => (<option value={option}>{option}</option>))}
+        {options.map((option, index) => (<option key={index} value={option}>{option}</option>))}
       </select>
     </>
   );

@@ -5,7 +5,7 @@ interface Props {
   className?:string,
   name:string,
   onChange?: (e: React.ChangeEvent<HTMLTextAreaElement>) => void,
-  defaultvalue?: string,
+  defaultValue?: string,
   placeholder?:string,
   rows: number,
   cols: number,
@@ -14,7 +14,7 @@ interface Props {
 
 const Textarea = (props: Props):JSX.Element => {
   const {
-    className, defaultvalue,
+    className, defaultValue,
   } = props;
   const BEM = (): string => {
     const classArray: string[] = ['textarea'];
@@ -25,7 +25,7 @@ const Textarea = (props: Props):JSX.Element => {
     return classArray.join(' ');
   };
   return (
-    <textarea className={BEM()} defaultValue={defaultvalue || ''} {...props} />
+    <textarea className={BEM()} defaultValue={defaultValue || ''} {...props} />
   );
 };
 export default Textarea;

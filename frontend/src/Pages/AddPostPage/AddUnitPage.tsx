@@ -1,8 +1,7 @@
-import { format } from 'date-fns';
 import React, { useContext } from 'react';
 import { useNavigate } from 'react-router';
 import Content from '../../components/Content/Content';
-import PostForm, { IFormFields } from '../../components/Templates/PostForm';
+import PostForm from '../../components/Templates/PostForm';
 import PostContext from '../../Context/PostContext';
 import { IUnit } from '../../data/post/postData';
 import './addUnitPage.scss';
@@ -14,7 +13,7 @@ const AddUnitPage = ():JSX.Element => {
   const onSave = (unit: IUnit):void => {
     addUnit({
       ...unit,
-      id: units.length + 1,
+      id: `${units.length + 1}`,
       name: 'Moto Sport',
       condition: 'Väga hea',
       location: 'Sahtel 2',

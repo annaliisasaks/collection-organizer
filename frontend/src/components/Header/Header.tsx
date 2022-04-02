@@ -1,8 +1,12 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import List from '../List/List';
 import NavBarItem from './Navbar/NavBarItem';
 
 import './header.scss';
+import Button from '../Button/Button';
+import UnitContext from '../../Context/PostContext';
+
+import { removeAuthorizationHeader } from '../../api';
 
 interface IMenuItems {
   name: string,
@@ -17,6 +21,7 @@ const menuItems: IMenuItems[] = [
 const Header = (): JSX.Element => {
   const [selectedTab, setSelectedTab] = useState('Esileht');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { setIsLoggedIn } = useContext(UnitContext);
 
   const renderNavButton = (opened: boolean): JSX.Element => (
     opened ? (
@@ -33,6 +38,11 @@ const Header = (): JSX.Element => {
       </span>
     )
   );
+
+  const handleLogOut = (): void => {
+    removeAuthorizationHeader();
+    setIsLoggedIn(false);
+  };
 
   return (
     <header className="header">
@@ -57,6 +67,15 @@ const Header = (): JSX.Element => {
               onClick={setSelectedTab}
             />
           ))}
+          <Button
+            purpose="primary"
+            onClick={handleLogOut}
+            className="header__log-out-button"
+          >
+            Logi välja
+
+          </Button>
+
         </List>
 
       </nav>

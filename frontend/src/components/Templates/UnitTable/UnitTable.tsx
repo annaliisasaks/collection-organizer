@@ -18,71 +18,63 @@ const UnitTable = (props: IUnitTableProps): JSX.Element => {
     <div className="table__wrapper">
 
       <Table>
-        <TableRow>
-          <TableHead>
-            Nr
-          </TableHead>
-          <TableHead>
-            Pilt
-          </TableHead>
-          <TableHead>
-            Nimi
-          </TableHead>
-          <TableHead>
-            Seisukord
-          </TableHead>
-          <TableHead>
-            Asukoht
-          </TableHead>
-          <TableHead>
-            Suurus
-          </TableHead>
-          <TableHead>
-            Materjal
-          </TableHead>
-          <TableHead>
-            Lisa võrdlusesse
-          </TableHead>
-        </TableRow>
-
-        {data.map((unit) => (
-
+        <tbody>
           <TableRow>
-            <TableData>
-              {unit.id}
-
-            </TableData>
-            <TableData>
-              <img src={unit.image} alt={unit.name} width="60" />
-
-            </TableData>
-            <TableData>
-              {unit.name}
-
-            </TableData>
-            <TableData>
-              {unit.condition}
-
-            </TableData>
-            <TableData>
-              {unit.location}
-
-            </TableData>
-            <TableData>
-              {unit.size}
-
-            </TableData>
-            <TableData>
-              {unit.material}
-
-            </TableData>
-            <TableData>
-              <Check id={unit.id} />
-
-            </TableData>
-
+            <TableHead>
+              Nr
+            </TableHead>
+            <TableHead>
+              Pilt
+            </TableHead>
+            <TableHead>
+              Nimi
+            </TableHead>
+            <TableHead>
+              Seisukord
+            </TableHead>
+            <TableHead>
+              Asukoht
+            </TableHead>
+            <TableHead>
+              Suurus
+            </TableHead>
+            <TableHead>
+              Materjal
+            </TableHead>
+            <TableHead>
+              Lisa võrdlusesse
+            </TableHead>
           </TableRow>
-        ))}
+
+          {data.map((unit) => (
+            <TableRow key={unit.id}>
+              <TableData>
+                {unit.id}
+              </TableData>
+              <TableData>
+                <img src={unit.image} alt={unit.name} width="60" />
+              </TableData>
+              <TableData>
+                {unit.name}
+              </TableData>
+              <TableData>
+                {unit.condition}
+              </TableData>
+              <TableData>
+                {unit.location}
+              </TableData>
+              <TableData>
+                {unit.size}
+              </TableData>
+              <TableData>
+                {unit.material}
+              </TableData>
+              <TableData>
+                <Check id={unit.id} />
+              </TableData>
+            </TableRow>
+          ))}
+        </tbody>
       </Table>
     </div>
 

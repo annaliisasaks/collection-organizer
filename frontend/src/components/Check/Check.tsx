@@ -1,11 +1,11 @@
 import React, {
-  useContext, useEffect, useRef, useState,
+  useContext, useEffect, useState,
 } from 'react';
 import './check.scss';
 import UnitContext from '../../Context/PostContext';
 
 interface ICheckProps {
-  id: number;
+  id: string;
 }
 
 const Check = (props: ICheckProps): JSX.Element => {

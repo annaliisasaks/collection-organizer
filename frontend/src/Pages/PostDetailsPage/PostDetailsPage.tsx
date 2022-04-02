@@ -9,7 +9,7 @@ const PostDetailsPage = ():JSX.Element => {
   const { id } = useParams();
   const { units, deleteUnit } = useContext(UnitContext);
   const navigate = useNavigate();
-  const handleUnitDelete = (deletedId:number):void => {
+  const handleUnitDelete = (deletedId: string): void => {
     deleteUnit(deletedId);
     navigate('/');
   };

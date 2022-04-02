@@ -36,14 +36,14 @@ const PostForm = (props:IPostForm):JSX.Element => {
   return (
     <form className="post-form" onSubmit={(e) => addPostHandler(e)}>
 
-      <Textfield className="post-form__input" type="text" name={formFields.header} placeholder={formFields.header} defaultvalue={currentFormFields?.header} required />
+      <Textfield className="post-form__input" type="text" name={formFields.header} placeholder={formFields.header} defaultValue={currentFormFields?.header} required />
       <Textarea
         className="post-form__textarea"
         rows={7}
         cols={5}
         name={formFields.content}
         placeholder={formFields.content}
-        defaultvalue={currentFormFields?.content}
+        defaultValue={currentFormFields?.content}
         required
       />
 

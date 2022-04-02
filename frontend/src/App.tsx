@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import './App.scss';
 import './SCSS/Main.scss';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
@@ -9,24 +9,47 @@ import AddUnitPage from './Pages/AddPostPage/AddUnitPage';
 import PostDetailsPage from './Pages/PostDetailsPage/PostDetailsPage';
 import EditPostPage from './Pages/EditPostPage/EditPostPage';
 import ComparePage from './Pages/ComparePage/ComparePage';
+import UnitContext from './Context/PostContext';
+import LoginPage from './Pages/LoginPage/LoginPage';
+import { setAuthroizationHeader } from './api';
 
-const App = ():JSX.Element => (
-  <BrowserRouter>
-    <div className="App">
-      <Header />
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/vordlus" element={<ComparePage />} />
-        <Route path="/galerii" element={<GalleryPage />} />
-        <Route path="/kirje/:id" element={<PostDetailsPage />} />
-        <Route path="/kirje/lisa" element={<AddUnitPage />} />
-        <Route path="/kirje/muuda/:id" element={<EditPostPage />} />
+const App = (): JSX.Element => {
+  const { isLoggedIn, setIsLoggedIn } = useContext(UnitContext);
 
-      </Routes>
+  useEffect(() => {
+    const token = sessionStorage.getItem('token');
+    const tokenExpirationTime = sessionStorage.getItem('tokenExpirationTime');
+    if (token && tokenExpirationTime) {
+      const tokenExpirationDateTime = new Date(parseInt(tokenExpirationTime, 10));
+      if (tokenExpirationDateTime > new Date()) {
+        setIsLoggedIn(true);
+        setAuthroizationHeader(token);
+      } else {
+        sessionStorage.clear();
+      }
+    }
+  }, [setIsLoggedIn]);
 
-    </div>
-
-  </BrowserRouter>
-);
+  if (isLoggedIn) {
+    return (
+      <BrowserRouter>
+        <div className="App">
+          <Header />
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/vordlus" element={<ComparePage />} />
+            <Route path="/galerii" element={<GalleryPage />} />
+            <Route path="/kirje/:id" element={<PostDetailsPage />} />
+            <Route path="/kirje/lisa" element={<AddUnitPage />} />
+            <Route path="/kirje/muuda/:id" element={<EditPostPage />} />
+          </Routes>
+        </div>
+      </BrowserRouter>
+    );
+  }
+  return (
+    <LoginPage />
+  );
+};
 
 export default App;

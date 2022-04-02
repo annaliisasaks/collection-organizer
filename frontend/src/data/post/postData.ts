@@ -19,7 +19,7 @@ export type Post = {
 }
 
 export interface IUnit {
-  id: number;
+  id: string;
   name: string;
   condition: string;
   location: string;
@@ -31,7 +31,7 @@ export interface IUnit {
 
 export const unitsData: IUnit[] = [
   {
-    id: 1,
+    id: '1',
     name: 'Moto Sport1',
     condition: 'Väga hea',
     location: 'Sahtel 2',
@@ -41,7 +41,7 @@ export const unitsData: IUnit[] = [
     image: coverImg,
   },
   {
-    id: 2,
+    id: '2',
     name: 'Moto Sport2',
     condition: 'Väga hea',
     location: 'Sahtel 2',
@@ -51,7 +51,7 @@ export const unitsData: IUnit[] = [
     image: coverImg,
   },
   {
-    id: 3,
+    id: '3',
     name: 'Moto Sport3',
     condition: 'Väga hea',
     location: 'Sahtel 2',

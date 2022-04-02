@@ -6,14 +6,14 @@ interface Props {
   type: 'text' | 'number',
   name: string,
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void,
-  defaultvalue?: string,
+  defaultValue?: string,
   placeholder?: string,
   required?: boolean,
 }
 
 const Textfield = (props: Props):JSX.Element => {
   const {
-    className, onChange, defaultvalue,
+    className, onChange, defaultValue,
   } = props;
   const BEM = (): string => {
     const classArray:string[] = ['textfield'];
@@ -24,7 +24,7 @@ const Textfield = (props: Props):JSX.Element => {
     return classArray.join(' ');
   };
   return (
-    <input className={BEM()} onChange={onChange} defaultValue={defaultvalue || ''} {...props} />
+    <input className={BEM()} onChange={onChange} defaultValue={defaultValue || ''} {...props} />
   );
 };
 export default Textfield;
