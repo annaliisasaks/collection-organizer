@@ -7,6 +7,7 @@
     border-radius: 10px;
     max-width: var(--container-width);
     box-shadow: 0 2px 5px $primaryColor;
+    color: $white;
 
     @media (max-width: 600px) {
         flex-direction: column;
@@ -28,5 +29,9 @@
 
     &--padding-medium {
         padding: 30px;
+    }
+
+    &--wide {
+        width: 100%;
     }
 }

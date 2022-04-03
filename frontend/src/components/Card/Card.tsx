@@ -12,11 +12,12 @@ interface ICardProps {
   backgroundColor?: 'white';
   borderRadius?: ICardBorderRadiusProps;
   padding?: 'medium'
+  fullWidth?: boolean
 }
 
 const Card = (props: ICardProps): JSX.Element => {
   const {
-    children, className, backgroundColor, borderRadius, padding,
+    children, className, backgroundColor, borderRadius, padding, fullWidth,
   } = props;
 
   const BEM = (): string => {
@@ -40,6 +41,10 @@ const Card = (props: ICardProps): JSX.Element => {
 
     if (padding) {
       classArray.push(`card--padding-${padding}`);
+    }
+
+    if (fullWidth) {
+      classArray.push('card--wide');
     }
 
     return classArray.join(' ');

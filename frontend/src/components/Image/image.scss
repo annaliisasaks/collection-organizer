@@ -1,0 +1,16 @@
+.image {
+
+    &--tiny {
+        max-width: 60px;
+    }
+    &--small {
+        max-width: 200px;
+    }
+    &--large {
+        max-width: 300px;
+    }
+}
+
+.image-inner {
+    width: 100%;
+}

@@ -24,7 +24,7 @@ a {
   color: inherit;
   outline: 0;
   cursor: pointer;
-  display:inline;
+  display: inline;
 }
 
 textarea:focus, input:focus, select:focus{
@@ -33,4 +33,8 @@ textarea:focus, input:focus, select:focus{
 
 .hidden {
   visibility: hidden;
+}
+
+.sr-only {
+  display: none;
 }

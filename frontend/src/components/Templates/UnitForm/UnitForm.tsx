@@ -6,6 +6,7 @@ import InputField from '../../Input/InputField';
 import Loader from '../../Loader/Loader';
 import Separator from '../../Separator/Separator';
 import './unitForm.scss';
+import Image from '../../Image/Image';
 
 interface IUnitFormProps {
   currentFormFields?: IUnitFormFields,
@@ -147,7 +148,7 @@ const UnitForm = (props: IUnitFormProps):JSX.Element => {
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleFileInputChange(e, 'image')}
           />
           {imagePreviewUri && (
-            <img src={imagePreviewUri} alt={formState.name} className="unit-form__preview-image" />
+            <Image src={imagePreviewUri} alt={formState.name} size="small" />
           )}
         </Grid>
       </Grid>

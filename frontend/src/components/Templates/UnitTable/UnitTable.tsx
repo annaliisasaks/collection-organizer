@@ -1,6 +1,7 @@
 import React from 'react';
 import { IUnit } from '../../../Context/PostContext';
 import Check from '../../Check/Check';
+import Image from '../../Image/Image';
 import Table from '../../Table/Table';
 import TableData from '../../Table/TableData';
 import TableHead from '../../Table/TableHead';
@@ -52,7 +53,7 @@ const UnitTable = (props: IUnitTableProps): JSX.Element => {
                 {index + 1}
               </TableData>
               <TableData>
-                <img src={unit.imageUrl} alt={unit.name} width="60" />
+                {unit.imageUrl && <Image src={unit.imageUrl} alt={unit.name} size="tiny" />}
               </TableData>
               <TableData>
                 {unit.name}

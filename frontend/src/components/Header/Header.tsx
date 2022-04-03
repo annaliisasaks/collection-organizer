@@ -21,7 +21,7 @@ const menuItems: IMenuItems[] = [
 const Header = (): JSX.Element => {
   const [selectedTab, setSelectedTab] = useState('Esileht');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { setIsLoggedIn } = useContext(UnitContext);
+  const { setIsLoggedIn, compare } = useContext(UnitContext);
 
   const renderNavButton = (opened: boolean): JSX.Element => (
     opened ? (
@@ -65,6 +65,7 @@ const Header = (): JSX.Element => {
               navLink={menuItem}
               isActive={selectedTab === menuItem.name}
               onClick={setSelectedTab}
+              showCompareCount={compare.length > 0}
             />
           ))}
           <Button

@@ -6,6 +6,7 @@ export interface IUnit {
   condition: string;
   location: string;
   size: string;
+  shape: string;
   material: string;
   story: string;
   imageUrl: string;

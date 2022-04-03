@@ -17,7 +17,7 @@ const Search = (props: Props): JSX.Element => {
 
   return (
     <form action="/" method="get" className="search__form">
-      <InputField type="text" name="query" defaultValue={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} />
+      <InputField type="text" name="query" defaultValue={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} placeholder="Otsi" />
       <Select options={['Nimi', 'Seisukord', 'Asukoht']} name="category" label="category" hideLabel />
       <Button purpose="primary" type="submit" onClick={handleSubmit}>Otsi</Button>
     </form>

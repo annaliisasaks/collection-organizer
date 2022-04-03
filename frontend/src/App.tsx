@@ -10,7 +10,7 @@ import PostDetailsPage from './Pages/PostDetailsPage/PostDetailsPage';
 import ComparePage from './Pages/ComparePage/ComparePage';
 import UnitContext from './Context/PostContext';
 import LoginPage from './Pages/LoginPage/LoginPage';
-import { setAuthroizationHeader } from './api';
+import { setAuthorizationHeaderAfterRefresh } from './api';
 import EditUnitPage from './Pages/EditUnitPage/EditUnitPage';
 
 const App = (): JSX.Element => {
@@ -22,8 +22,8 @@ const App = (): JSX.Element => {
     if (token && tokenExpirationTime) {
       const tokenExpirationDateTime = new Date(parseInt(tokenExpirationTime, 10));
       if (tokenExpirationDateTime > new Date()) {
+        setAuthorizationHeaderAfterRefresh(token);
         setIsLoggedIn(true);
-        setAuthroizationHeader(token);
       } else {
         sessionStorage.clear();
       }
