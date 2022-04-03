@@ -5,13 +5,13 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Header from './components/Header/Header';
 import HomePage from './Pages/HomePage/HomePage';
 import GalleryPage from './Pages/GalleryPage/GalleryPage';
-import AddUnitPage from './Pages/AddPostPage/AddUnitPage';
+import AddUnitPage from './Pages/AddUnitPage/AddUnitPage';
 import PostDetailsPage from './Pages/PostDetailsPage/PostDetailsPage';
-import EditPostPage from './Pages/EditPostPage/EditPostPage';
 import ComparePage from './Pages/ComparePage/ComparePage';
 import UnitContext from './Context/PostContext';
 import LoginPage from './Pages/LoginPage/LoginPage';
 import { setAuthroizationHeader } from './api';
+import EditUnitPage from './Pages/EditUnitPage/EditUnitPage';
 
 const App = (): JSX.Element => {
   const { isLoggedIn, setIsLoggedIn } = useContext(UnitContext);
@@ -41,7 +41,7 @@ const App = (): JSX.Element => {
             <Route path="/galerii" element={<GalleryPage />} />
             <Route path="/kirje/:id" element={<PostDetailsPage />} />
             <Route path="/kirje/lisa" element={<AddUnitPage />} />
-            <Route path="/kirje/muuda/:id" element={<EditPostPage />} />
+            <Route path="/kirje/muuda/:id" element={<EditUnitPage />} />
           </Routes>
         </div>
       </BrowserRouter>

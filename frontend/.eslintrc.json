@@ -63,6 +63,7 @@
             "code": 200
          }
       ],
+      "no-underscore-dangle": ["error", { "allow": ["_id"] }],
       "react-hooks/rules-of-hooks": "error",
       "react-hooks/exhaustive-deps": "warn",
       "import/prefer-default-export": "off",

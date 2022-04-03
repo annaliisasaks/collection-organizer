@@ -1,30 +1,34 @@
 import React from 'react';
-import './textfield.scss';
+import './inputField.scss';
 
 interface Props {
   className?:string,
-  type: 'text' | 'number',
+  type: 'text' | 'number' | 'file',
   name: string,
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void,
   defaultValue?: string,
   placeholder?: string,
   required?: boolean,
+  multiple?: boolean,
 }
 
-const Textfield = (props: Props):JSX.Element => {
+const InputField = (props: Props): JSX.Element => {
   const {
-    className, onChange, defaultValue,
+    className, onChange, defaultValue, multiple,
   } = props;
   const BEM = (): string => {
-    const classArray:string[] = ['textfield'];
+    const classArray: string[] = ['input-field'];
 
     if (className) {
       classArray.push(className);
     }
+
     return classArray.join(' ');
   };
+
   return (
-    <input className={BEM()} onChange={onChange} defaultValue={defaultValue || ''} {...props} />
+    <input className={BEM()} multiple={multiple} onChange={onChange} defaultValue={defaultValue || ''} {...props} />
   );
 };
-export default Textfield;
+
+export default InputField;

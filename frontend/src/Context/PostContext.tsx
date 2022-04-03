@@ -1,5 +1,15 @@
 import React, { useState } from 'react';
-import { unitsData, IUnit } from '../data/post/postData';
+
+export interface IUnit {
+  _id: string;
+  name: string;
+  condition: string;
+  location: string;
+  size: string;
+  material: string;
+  story: string;
+  imageUrl: string;
+}
 
 interface Props {
     children:React.ReactNode;
@@ -14,12 +24,13 @@ interface IUnitContext {
   addCompare: (id: string) => void;
   deleteCompare: (id: string) => void;
   setIsLoggedIn: (state: boolean) => void;
+  setUnits: (units: IUnit[]) => void;
 
 }
 
 const unitContextInitial = {
-  units: unitsData,
-  compare: unitsData,
+  units: [],
+  compare: [],
   isLoggedIn: false,
   addUnit: () => undefined,
   deleteUnit: () => undefined,
@@ -27,13 +38,14 @@ const unitContextInitial = {
   addCompare: () => undefined,
   deleteCompare: () => undefined,
   setIsLoggedIn: () => undefined,
+  setUnits: () => undefined,
 };
 
 export const UnitContext = React.createContext<IUnitContext>(unitContextInitial);
 
 export const UnitContextProvider = (props:Props): JSX.Element => {
   const { children } = props;
-  const [units, setUnits] = useState(unitsData);
+  const [units, setUnits] = useState<IUnit[]>([]);
   const [compare, setCompare] = useState<IUnit[]>([]);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
@@ -42,26 +54,26 @@ export const UnitContextProvider = (props:Props): JSX.Element => {
   };
 
   const deleteUnit = (id: string):void => {
-    setUnits(units.filter((unit) => unit.id !== id));
+    setUnits(units.filter((unit) => unit._id !== id));
   };
 
   const editUnit = (editedUnit: IUnit):void => {
-    setUnits(units.map((unit) => (unit.id === editedUnit.id ? { ...unit, ...editedUnit } : unit)));
+    setUnits(units.map((unit) => (unit._id === editedUnit._id ? { ...unit, ...editedUnit } : unit)));
   };
 
   const addCompare = (id: string): void => {
-    const addCompareUnit = units.find((unit) => unit.id === id);
+    const addCompareUnit = units.find((unit) => unit._id === id);
     if (addCompareUnit) {
       setCompare([...compare, addCompareUnit]);
     }
   };
 
   const deleteCompare = (id: string): void => {
-    setCompare(compare.filter((unit) => unit.id !== id));
+    setCompare(compare.filter((unit) => unit._id !== id));
   };
 
   const value = {
-    units, addUnit, deleteUnit, editUnit, addCompare, compare, deleteCompare, isLoggedIn, setIsLoggedIn,
+    units, addUnit, deleteUnit, editUnit, addCompare, compare, deleteCompare, isLoggedIn, setIsLoggedIn, setUnits,
   };
   return (
     <UnitContext.Provider

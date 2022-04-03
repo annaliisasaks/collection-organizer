@@ -13,7 +13,7 @@ const PostDetailsPage = ():JSX.Element => {
     deleteUnit(deletedId);
     navigate('/');
   };
-  const selectedUnit = units.find((unit) => unit.id.toString() === id);
+  const selectedUnit = units.find((unit) => unit._id === id);
 
   return (
     <Content>
@@ -21,8 +21,8 @@ const PostDetailsPage = ():JSX.Element => {
       <div className="post">
         <div className="post__header">
           <div className="post__button-wrapper">
-            <Button className="post__button" purpose="delete" onClick={() => handleUnitDelete(selectedUnit.id)}>Delete</Button>
-            <Button className="post__button" purpose="secondary" onClick={() => navigate(`/kirje/muuda/${selectedUnit.id}`)}>Edit</Button>
+            <Button className="post__button" purpose="delete" onClick={() => handleUnitDelete(selectedUnit._id)}>Delete</Button>
+            <Button className="post__button" purpose="secondary" onClick={() => navigate(`/kirje/muuda/${selectedUnit._id}`)}>Edit</Button>
           </div>
         </div>
 

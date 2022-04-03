@@ -1,35 +1,39 @@
 import React from 'react';
-import './content.scss';
+import './grid.scss';
 
-interface IContentProps {
+interface IGridProps {
   children: React.ReactNode,
   direction?: 'column',
   className?: string,
-  align?: 'center'
+  gap?: 'small' | 'medium'
 }
 
-const Content = (props: IContentProps):JSX.Element => {
+const Grid = (props: IGridProps): JSX.Element => {
   const {
-    children, direction, className, align,
+    children, direction, className, gap,
   } = props;
   const BEM = (): string => {
-    const classArray: string[] = ['content'];
+    const classArray: string[] = ['grid'];
 
     if (className) {
       classArray.push(className);
     }
+
     if (direction) {
-      classArray.push(`content--${direction}`);
+      classArray.push(`grid--${direction}`);
     }
-    if (align) {
-      classArray.push(`content--${align}`);
+
+    if (gap) {
+      classArray.push(`grid--gap-${gap}`);
     }
+
     return classArray.join(' ');
   };
+
   return (
     <div className={BEM()}>
       {children}
     </div>
   );
 };
-export default Content;
+export default Grid;

@@ -1,5 +1,5 @@
 import React from 'react';
-import { IUnit } from '../../../data/post/postData';
+import { IUnit } from '../../../Context/PostContext';
 import Check from '../../Check/Check';
 import Table from '../../Table/Table';
 import TableData from '../../Table/TableData';
@@ -46,13 +46,13 @@ const UnitTable = (props: IUnitTableProps): JSX.Element => {
             </TableHead>
           </TableRow>
 
-          {data.map((unit) => (
-            <TableRow key={unit.id}>
+          {data.map((unit, index) => (
+            <TableRow key={unit._id}>
               <TableData>
-                {unit.id}
+                {index + 1}
               </TableData>
               <TableData>
-                <img src={unit.image} alt={unit.name} width="60" />
+                <img src={unit.imageUrl} alt={unit.name} width="60" />
               </TableData>
               <TableData>
                 {unit.name}
@@ -70,7 +70,7 @@ const UnitTable = (props: IUnitTableProps): JSX.Element => {
                 {unit.material}
               </TableData>
               <TableData>
-                <Check id={unit.id} />
+                <Check id={unit._id} />
               </TableData>
             </TableRow>
           ))}

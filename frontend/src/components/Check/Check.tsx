@@ -13,7 +13,7 @@ const Check = (props: ICheckProps): JSX.Element => {
   const { id } = props;
 
   const { addCompare, compare, deleteCompare } = useContext(UnitContext);
-  const isInCompare = !!compare.find((unit) => unit.id === id);
+  const isInCompare = !!compare.find((unit) => unit._id === id);
 
   useEffect(() => {
     setChecked(isInCompare);
