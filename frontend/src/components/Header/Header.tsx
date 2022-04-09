@@ -8,11 +8,11 @@ import UnitContext from '../../Context/PostContext';
 
 import { removeAuthorizationHeader } from '../../api';
 
-interface IMenuItems {
+interface IMenuItem {
   name: string,
   path: string,
 }
-const menuItems: IMenuItems[] = [
+const menuItems: IMenuItem[] = [
   { name: 'Esileht', path: '/' },
   { name: 'Võrdlus', path: '/vordlus' },
   { name: 'Galerii', path: '/galerii' },

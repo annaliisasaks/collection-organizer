@@ -15,6 +15,22 @@
         gap: 20px;
     }
 
+    &--align-start {
+        align-items: flex-start;
+    }
+
+    &--align-center {
+        align-items: center;
+    }
+
+    &--align-end {
+        align-items: flex-end;
+    }
+
+    &--between {
+        justify-content: space-between;
+    }
+
     @media (max-width: 1024px) {
         flex-direction: column;
     }

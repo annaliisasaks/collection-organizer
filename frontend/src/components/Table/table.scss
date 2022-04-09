@@ -26,6 +26,10 @@
     padding: 10px;
     text-align: center;
     position: relative;
+
+    &--clickable {
+      cursor: pointer;
+    }
 }
   
   /* top-left border-radius */

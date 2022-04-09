@@ -3,7 +3,7 @@ import './separator.scss';
 
 interface ISeparatorProps {
   type: 'div' | 'hr',
-  size?: 'small' | 'medium',
+  size?: 'small' | 'medium' | 'xsmall',
   color?: 'transparent'
 }
 

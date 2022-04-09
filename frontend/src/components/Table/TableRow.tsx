@@ -2,7 +2,7 @@ import React from 'react';
 import './table.scss';
 
 interface ITableRowProps {
-  className?: 'string',
+  className?: string,
   children: React.ReactNode;
 }
 
@@ -19,7 +19,7 @@ const TableRow = (props: ITableRowProps): JSX.Element => {
   };
 
   return (
-    <tr className={BEM()}>
+    <tr {...props} className={BEM()}>
       {children}
     </tr>
 

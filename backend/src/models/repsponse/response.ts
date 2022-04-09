@@ -23,3 +23,7 @@ export const send400Response = (res: Response, error: any) => {
 export const sendResourceNotFoundResponse = (res: Response) => {
     res.sendStatus(404);
 }
+
+export const sendResourceDeletedResponse = (res: Response) => {
+    res.sendStatus(204);
+}

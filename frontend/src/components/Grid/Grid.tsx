@@ -5,12 +5,14 @@ interface IGridProps {
   children: React.ReactNode,
   direction?: 'column',
   className?: string,
-  gap?: 'small' | 'medium'
+  gap?: 'small' | 'medium',
+  align?: 'start' | 'center' | 'end',
+  between?: boolean,
 }
 
 const Grid = (props: IGridProps): JSX.Element => {
   const {
-    children, direction, className, gap,
+    children, direction, className, gap, align, between,
   } = props;
   const BEM = (): string => {
     const classArray: string[] = ['grid'];
@@ -25,6 +27,14 @@ const Grid = (props: IGridProps): JSX.Element => {
 
     if (gap) {
       classArray.push(`grid--gap-${gap}`);
+    }
+
+    if (align) {
+      classArray.push(`grid--align-${align}`);
+    }
+
+    if (between) {
+      classArray.push('grid--between');
     }
 
     return classArray.join(' ');

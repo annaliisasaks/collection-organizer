@@ -7,9 +7,10 @@ import Loader from '../../Loader/Loader';
 import Separator from '../../Separator/Separator';
 import './unitForm.scss';
 import Image from '../../Image/Image';
+import { IUnit } from '../../../Context/PostContext';
 
 interface IUnitFormProps {
-  currentFormFields?: IUnitFormFields,
+  currentFormFields?: IUnit,
   onSave?: (unit: IUnitFormFields) => void,
   isLoading?: boolean
 }
@@ -83,6 +84,16 @@ const UnitForm = (props: IUnitFormProps):JSX.Element => {
     }));
   };
 
+  const renderImagePreview = (): JSX.Element | null => {
+    if (imagePreviewUri) {
+      return <Image src={imagePreviewUri} alt={formState.name} size="small" />;
+    }
+    if (currentFormFields?.imageUrl) {
+      return <Image src={currentFormFields.imageUrl} alt={formState.name} size="small" />;
+    }
+    return null;
+  };
+
   return (
     <form onSubmit={(e) => addUnitHandler(e)} className="unit-form">
       <Grid gap="medium">
@@ -147,9 +158,7 @@ const UnitForm = (props: IUnitFormProps):JSX.Element => {
             name={formFields.image}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleFileInputChange(e, 'image')}
           />
-          {imagePreviewUri && (
-            <Image src={imagePreviewUri} alt={formState.name} size="small" />
-          )}
+          {renderImagePreview()}
         </Grid>
       </Grid>
       <Separator type="div" color="transparent" />

@@ -3,7 +3,7 @@ import './table.scss';
 
 interface ITableProps {
   children: React.ReactNode;
-  className?: 'string';
+  className?: string;
 }
 
 const Table = (props: ITableProps): JSX.Element => {

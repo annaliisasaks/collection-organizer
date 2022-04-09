@@ -17,3 +17,12 @@ export function uploadFileToS3(fileName: string, fileContent: Buffer): Promise<A
 
     return s3.upload(params).promise()
 }
+
+export function deleteFileFromS3(fileName: string): Promise<AWS.S3.Types.DeleteObjectOutput> {
+    const params = {
+        Bucket: BUCKET_NAME,
+        Key: fileName,
+    };
+
+    return s3.deleteObject(params).promise()
+}

@@ -1,6 +1,10 @@
+import { AxiosResponse } from 'axios';
 import React, { useContext } from 'react';
 import { useParams, useNavigate } from 'react-router';
+import API from '../../api';
+import Card from '../../components/Card/Card';
 import Content from '../../components/Content/Content';
+import UnitForm, { IUnitFormFields } from '../../components/Templates/UnitForm/UnitForm';
 import UnitContext, { IUnit } from '../../Context/PostContext';
 
 const EditUnitPage = ():JSX.Element => {
@@ -10,20 +14,36 @@ const EditUnitPage = ():JSX.Element => {
 
   const currentUnit = units.find((unit) => unit._id === id);
 
-  const onSave = (unit: IUnit): void => {
-    if (currentUnit && unit.name && unit.story) {
-      editUnit({
-        ...currentUnit,
-        name: unit.name,
-        story: unit.story,
-      });
+  const onSave = (unit: IUnitFormFields): void => {
+    if (currentUnit && unit.name) {
+      const formData = new FormData();
+      if (unit.image) {
+        formData.append('file', unit.image);
+      }
+      formData.append('name', unit.name);
+      formData.append('condition', unit.condition);
+      formData.append('location', unit.location);
+      formData.append('size', unit.size);
+      formData.append('material', unit.material);
+      formData.append('story', unit.story);
+      formData.append('shape', unit.shape);
+
+      API.put(`/unit/${id}`, formData, { headers: { 'Content-Type': 'multipart/form-data' } })
+        .then((response: AxiosResponse<IUnit>) => {
+          if (response.data) {
+            editUnit(response.data);
+            navigate('/');
+          }
+        })
+        .catch(console.error);
     }
-    navigate('/');
   };
   return (
     <Content direction="column">
-      <h1>Edit post</h1>
-      <p>Post not found</p>
+      <Card fullWidth>
+        <UnitForm currentFormFields={currentUnit} onSave={onSave} />
+
+      </Card>
     </Content>
   );
 };

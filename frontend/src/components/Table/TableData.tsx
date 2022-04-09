@@ -4,10 +4,11 @@ import './table.scss';
 interface ITableDataProps {
   className?: string,
   children: React.ReactNode;
+  onClick?: (event: React.MouseEvent) => void,
 }
 
 const TableData = (props: ITableDataProps): JSX.Element => {
-  const { className, children } = props;
+  const { className, children, onClick } = props;
   const BEM = (): string => {
     const classArray: string[] = ['table-data'];
 
@@ -15,11 +16,15 @@ const TableData = (props: ITableDataProps): JSX.Element => {
       classArray.push(className);
     }
 
+    if (onClick) {
+      classArray.push('table-data--clickable');
+    }
+
     return classArray.join(' ');
   };
 
   return (
-    <td className={BEM()}>
+    <td {...props} className={BEM()}>
       {children}
     </td>
 

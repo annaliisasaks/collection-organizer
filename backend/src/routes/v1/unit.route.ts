@@ -29,4 +29,18 @@ router.post("/", multer().single("file"), authenticateAccessToken, [...createAdd
     unitController.addUnit(req, res)
 });
 
+// Edit unit
+router.put("/:id", multer().single("file"), authenticateAccessToken, [...createAddUnitValidation()], async (req, res) => {
+    const validationErrors = validationResult(req);
+    if (!validationErrors.isEmpty()) {
+        return res.status(422).json({
+            errors: validationErrors.array()
+        })
+    }
+    await unitController.editUnit(req, res)
+});
+
+// Delete unit
+router.delete("/:id", authenticateAccessToken, unitController.deleteById)
+
 export default router;

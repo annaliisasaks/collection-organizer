@@ -10,6 +10,7 @@ export interface IUnit {
   material: string;
   story: string;
   imageUrl: string;
+  image: string;
 }
 
 interface Props {

@@ -21,7 +21,6 @@ const NavBarItem = (props: INavBarItemProps):JSX.Element => {
   const handleClick = (): void => {
     onClick(navLink.name);
   };
-  console.log(showCompareCount);
   return (
     <ListItem className="header__nav-item">
       <Link

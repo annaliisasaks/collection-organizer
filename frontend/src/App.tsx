@@ -6,7 +6,7 @@ import Header from './components/Header/Header';
 import HomePage from './Pages/HomePage/HomePage';
 import GalleryPage from './Pages/GalleryPage/GalleryPage';
 import AddUnitPage from './Pages/AddUnitPage/AddUnitPage';
-import PostDetailsPage from './Pages/PostDetailsPage/PostDetailsPage';
+import UnitDetailsPage from './Pages/UnitDetailsPage/UnitDetailsPage';
 import ComparePage from './Pages/ComparePage/ComparePage';
 import UnitContext from './Context/PostContext';
 import LoginPage from './Pages/LoginPage/LoginPage';
@@ -39,7 +39,7 @@ const App = (): JSX.Element => {
             <Route path="/" element={<HomePage />} />
             <Route path="/vordlus" element={<ComparePage />} />
             <Route path="/galerii" element={<GalleryPage />} />
-            <Route path="/kirje/:id" element={<PostDetailsPage />} />
+            <Route path="/kirje/:id" element={<UnitDetailsPage />} />
             <Route path="/kirje/lisa" element={<AddUnitPage />} />
             <Route path="/kirje/muuda/:id" element={<EditUnitPage />} />
           </Routes>

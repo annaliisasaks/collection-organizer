@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { IUnit } from '../../../Context/PostContext';
 import Check from '../../Check/Check';
 import Image from '../../Image/Image';
@@ -14,6 +15,7 @@ interface IUnitTableProps {
 
 const UnitTable = (props: IUnitTableProps): JSX.Element => {
   const { data } = props;
+  const navigate = useNavigate();
 
   return (
     <div className="table__wrapper">
@@ -48,26 +50,27 @@ const UnitTable = (props: IUnitTableProps): JSX.Element => {
           </TableRow>
 
           {data.map((unit, index) => (
+
             <TableRow key={unit._id}>
-              <TableData>
+              <TableData onClick={() => navigate(`/kirje/${unit._id}`)}>
                 {index + 1}
               </TableData>
               <TableData>
                 {unit.imageUrl && <Image src={unit.imageUrl} alt={unit.name} size="tiny" />}
               </TableData>
-              <TableData>
+              <TableData onClick={() => navigate(`/kirje/${unit._id}`)}>
                 {unit.name}
               </TableData>
-              <TableData>
+              <TableData onClick={() => navigate(`/kirje/${unit._id}`)}>
                 {unit.condition}
               </TableData>
-              <TableData>
+              <TableData onClick={() => navigate(`/kirje/${unit._id}`)}>
                 {unit.location}
               </TableData>
-              <TableData>
+              <TableData onClick={() => navigate(`/kirje/${unit._id}`)}>
                 {unit.size}
               </TableData>
-              <TableData>
+              <TableData onClick={() => navigate(`/kirje/${unit._id}`)}>
                 {unit.material}
               </TableData>
               <TableData>
