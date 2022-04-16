@@ -42,6 +42,9 @@ const UnitTable = (props: IUnitTableProps): JSX.Element => {
               Suurus
             </TableHead>
             <TableHead>
+              Kuju
+            </TableHead>
+            <TableHead>
               Materjal
             </TableHead>
             <TableHead>
@@ -72,6 +75,9 @@ const UnitTable = (props: IUnitTableProps): JSX.Element => {
                 </TableData>
                 <TableData>
                   {unit.size}
+                </TableData>
+                <TableData>
+                  {unit.shape}
                 </TableData>
                 <TableData>
                   {unit.material}

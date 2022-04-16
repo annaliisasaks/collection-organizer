@@ -9,15 +9,30 @@ import Separator from '../Separator/Separator';
 import UnitTable from '../Templates/UnitTable/UnitTable';
 
 const Main = (): JSX.Element => {
-  const [query, setQuery] = useState('');
+  const [query, setQuery] = useState({ input: '', category: 'Nimi' });
   const [isLoading, setIsLoading] = useState(false);
   const { units, setUnits } = useContext(UnitContext);
-  const filterUnits = (inputValue: string): IUnit[] => {
-    if (!inputValue) {
-      return units;
+  const filterUnits = (): IUnit[] => units.filter((unit: IUnit) => {
+    if (query.category === 'Nimi') {
+      return (unit.name.toLowerCase().includes(query.input.toLowerCase()));
     }
-    return units.filter((unit: IUnit) => unit.name.toLowerCase().includes(query.toLowerCase()));
-  };
+    if (query.category === 'Seisukord') {
+      return (unit.condition.toLowerCase().includes(query.input.toLowerCase()));
+    }
+    if (query.category === 'Asukoht') {
+      return (unit.location.toLowerCase().includes(query.input.toLowerCase()));
+    }
+    if (query.category === 'Suurus') {
+      return (unit.size.toLowerCase().includes(query.input.toLowerCase()));
+    }
+    if (query.category === 'Kuju') {
+      return (unit.shape.toLowerCase().includes(query.input.toLowerCase()));
+    }
+    if (query.category === 'Materjal') {
+      return (unit.material.toLowerCase().includes(query.input.toLowerCase()));
+    }
+    return units;
+  });
   const getUnits = (): void => {
     setIsLoading(true);
     API.get('/unit')
@@ -32,7 +47,7 @@ const Main = (): JSX.Element => {
     getUnits();
   }, []);
 
-  const filteredUnits = filterUnits(query);
+  const filteredUnits = filterUnits();
 
   return (
     <>

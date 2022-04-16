@@ -7,11 +7,12 @@ interface ISelectProps {
   label: string;
   hideLabel?: boolean;
   className?: string;
+  onChange?: (e: React.ChangeEvent<HTMLSelectElement>) => void,
 }
 
 const Select = (props: ISelectProps): JSX.Element => {
   const {
-    options, label, name, hideLabel, className,
+    options, label, name, hideLabel, className, onChange,
   } = props;
 
   const BEM = (): string => {
@@ -27,8 +28,8 @@ const Select = (props: ISelectProps): JSX.Element => {
   return (
     <>
       {hideLabel ? <label htmlFor={name} hidden>{label}</label> : <label htmlFor={name}>{label}</label> }
-      <select name={name} className={BEM()}>
-        {options.map((option, index) => (<option key={index} value={option}>{option}</option>))}
+      <select name={name} className={BEM()} onChange={onChange}>
+        {options.map((option, index) => <option key={index} value={option}>{option}</option>)}
       </select>
     </>
   );
