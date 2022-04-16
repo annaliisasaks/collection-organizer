@@ -15,7 +15,7 @@ const ComparePage = ():JSX.Element => {
         <>
           <Card fullWidth>
             <Grid gap="medium">
-              <Image src={unit.imageUrl} alt={unit.name} size="large" />
+              {unit.images.map((i) => <Image key={i._id} src={i.imageUrl} alt={unit.name} size="large" />)}
               <Grid direction="column">
                 <h2>{unit.name}</h2>
                 <p>

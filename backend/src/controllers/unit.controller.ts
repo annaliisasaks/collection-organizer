@@ -1,9 +1,9 @@
 import { Response, Request } from "express";
-import { v4 as uuidv4 } from "uuid";
 import { TypedRequestBody, TypedRequestParams } from '../models/requests/types';
-import Unit, { IUnit } from "../models/db/unit.model";
-import { uploadFileToS3, deleteFileFromS3 } from "../services/s3.service"
+import Unit, { IImage, IUnit } from "../models/db/unit.model";
+import { deleteFileFromS3 } from "../services/s3.service"
 import { sendResourceCreatedResponse, send400Response, sendResourceFoundResponse, sendGetFailedResponse, sendResourceNotFoundResponse, sendResourceDeletedResponse } from "../models/repsponse/response";
+import { uploadFilesFromRequest } from "../services/file.upload.service";
 
 const getById = (req: TypedRequestParams, res: Response) => {
     const { id } = req.params;
@@ -19,19 +19,9 @@ const getAll = (req: Request, res: Response) => {
 }
 
 const addUnit = async (req: TypedRequestBody<IUnit>, res: Response) => {
-    let uploadedFileUrl;
-    let fileName;
-    if (req.file) {
-        const file = req.file;
-        try {
-            fileName = `${uuidv4()}-${file.originalname}`;
-            const fileUploadResponse = await uploadFileToS3(fileName, file.buffer);
-            uploadedFileUrl = fileUploadResponse.Location;
-        } catch (e) {
-            console.error("File upload failed", e)
-        }
-    }
-    const unit = new Unit({ ...req.body, imageUrl: uploadedFileUrl, imageName: fileName });
+    const uploadedFiles = await uploadFilesFromRequest(req);
+
+    const unit = new Unit({ ...req.body, images: uploadedFiles });
     unit.save()
         .then((createdUnit) => {
             sendResourceCreatedResponse(res, createdUnit);
@@ -42,29 +32,15 @@ const addUnit = async (req: TypedRequestBody<IUnit>, res: Response) => {
 }
 
 const editUnit = async (req: TypedRequestBody<IUnit>, res: Response) => {
-    let uploadedFileUrl;
-    let fileName;
-    let uploadedNew = false;
+    const uploadedFiles = await uploadFilesFromRequest(req);
 
-    if (req.file && req.file) {
-        const file = req.file;
-        try {
-            fileName = `${uuidv4()}-${file.originalname}`;
-            const fileUploadResponse = await uploadFileToS3(fileName, file.buffer);
-            uploadedFileUrl = fileUploadResponse.Location;
-            uploadedNew = true
-        } catch (e) {
-            console.error("File upload failed")
-        }
-    }
-
-    Unit.findByIdAndUpdate(req.params.id, { ...req.body, ...(uploadedNew && {imageUrl: uploadedFileUrl, imageName: fileName})})
+    Unit.findByIdAndUpdate(req.params.id, { ...req.body, ...(req.files && req.files?.length && {images: uploadedFiles})})
         .then((original) => {
-            if (uploadedNew) {
-                deleteFileFromS3(original.imageName)
+            if (req.files && req.files?.length) {
+                original.images.forEach(i => deleteFileFromS3(i.imageName))
             }
             Unit.findById(req.params.id)
-                .then((matchbox) => sendResourceFoundResponse(res, matchbox))
+                .then((unit) => sendResourceFoundResponse(res, unit))
                 .catch(() => sendResourceNotFoundResponse(res))
         })
         .catch((error) => {
@@ -74,10 +50,9 @@ const editUnit = async (req: TypedRequestBody<IUnit>, res: Response) => {
 
 const deleteById = (req: TypedRequestParams, res: Response) => {
     const { id } = req.params;
-    console.log(id)
     Unit.findByIdAndDelete(id)
         .then((deletedResource) => {
-            deleteFileFromS3(deletedResource.imageName);
+            deletedResource.images.forEach(i => deleteFileFromS3(i.imageName))
             sendResourceDeletedResponse(res);
         })
         .catch((error) => {

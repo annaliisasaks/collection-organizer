@@ -1,6 +1,6 @@
 export interface TypedRequestBody<T = any> extends Express.Request {
     body?:  T,
-    file?: any,
+    files?: any[],
     params: { id?: string }
 }
 

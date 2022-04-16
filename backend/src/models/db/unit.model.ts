@@ -1,5 +1,11 @@
 import mongoose from "mongoose";
 
+export interface IImage {
+  imageUrl: string, 
+  imageName: string, 
+  isCoverImage: boolean
+}
+
 export interface IUnit {
     name: string;
     condition: string;
@@ -8,11 +14,27 @@ export interface IUnit {
     material: string;
     story: string;
     shape: string;
-    imageUrl: string,
-    imageName: string
+    images: IImage[],
+    coverImageIndex: number;
 }
 
 interface UnitDocument extends IUnit, mongoose.Document {}
+
+const UnitImageSchema = new mongoose.Schema({
+  imageUrl: {
+    type: String,
+    required: true,
+  },
+  imageName: {
+    type: String,
+    required: true,
+  },
+  isCoverImage: {
+    type: Boolean,
+    required: false,
+    default: false
+  },
+})
 
 const UnitSchema = new mongoose.Schema({
   name: {
@@ -49,15 +71,7 @@ const UnitSchema = new mongoose.Schema({
     required: false,
     default: ""
   },
-  imageUrl: {
-    type: String,
-    required: false,
-    default: ""
-  },
-  imageName: {
-    type: String,
-    required: false,
-  }
+  images: [UnitImageSchema]
 }, {
     timestamps: { createdAt: true, updatedAt: true }
 });

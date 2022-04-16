@@ -20,16 +20,16 @@
 .table-row {
     border-bottom: 1px solid $primaryColor;
     background-color: $white;
+
+    &--clickable {
+      cursor: pointer;
+    }
 }
 
 .table-data {
     padding: 10px;
     text-align: center;
     position: relative;
-
-    &--clickable {
-      cursor: pointer;
-    }
 }
   
   /* top-left border-radius */

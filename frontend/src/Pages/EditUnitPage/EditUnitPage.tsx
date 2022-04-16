@@ -13,13 +13,10 @@ const EditUnitPage = ():JSX.Element => {
   const navigate = useNavigate();
 
   const currentUnit = units.find((unit) => unit._id === id);
-
   const onSave = (unit: IUnitFormFields): void => {
     if (currentUnit && unit.name) {
       const formData = new FormData();
-      if (unit.image) {
-        formData.append('file', unit.image);
-      }
+      Array.from(unit.images).forEach((i) => formData.append('files', i));
       formData.append('name', unit.name);
       formData.append('condition', unit.condition);
       formData.append('location', unit.location);
@@ -27,6 +24,7 @@ const EditUnitPage = ():JSX.Element => {
       formData.append('material', unit.material);
       formData.append('story', unit.story);
       formData.append('shape', unit.shape);
+      formData.append('coverImageIndex', unit.coverImageIndex);
 
       API.put(`/unit/${id}`, formData, { headers: { 'Content-Type': 'multipart/form-data' } })
         .then((response: AxiosResponse<IUnit>) => {
@@ -42,7 +40,6 @@ const EditUnitPage = ():JSX.Element => {
     <Content direction="column">
       <Card fullWidth>
         <UnitForm currentFormFields={currentUnit} onSave={onSave} />
-
       </Card>
     </Content>
   );

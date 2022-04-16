@@ -21,12 +21,12 @@ const LoginButton = (): JSX.Element => {
       .catch((e) => {
         removeAuthorizationHeader();
         setIsLoggedIn(false);
-        console.log('Login failed: ', e);
+        console.error('Login failed: ', e);
       });
   };
 
   const handleLoginFailure = (e: any): void => {
-    console.log('Failure: ', e);
+    console.error('Failure: ', e);
     removeAuthorizationHeader();
     setIsLoggedIn(false);
   };

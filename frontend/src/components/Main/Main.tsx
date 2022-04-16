@@ -23,7 +23,7 @@ const Main = (): JSX.Element => {
     API.get('/unit')
       .then((response: AxiosResponse<IUnit[]>) => setUnits(response.data))
       .catch((error) => {
-        console.log('We have a server error', error);
+        console.error('We have a server error', error);
         setUnits([]);
       })
       .finally(() => setIsLoading(false));

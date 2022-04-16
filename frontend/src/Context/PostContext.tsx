@@ -1,5 +1,12 @@
 import React, { useState } from 'react';
 
+export interface IImage {
+  imageUrl: string,
+  imageName: string,
+  isCoverImage: boolean,
+  _id: string
+}
+
 export interface IUnit {
   _id: string;
   name: string;
@@ -9,8 +16,7 @@ export interface IUnit {
   shape: string;
   material: string;
   story: string;
-  imageUrl: string;
-  image: string;
+  images: IImage[]
 }
 
 interface Props {

@@ -7,7 +7,7 @@ import Loader from '../../Loader/Loader';
 import Separator from '../../Separator/Separator';
 import './unitForm.scss';
 import Image from '../../Image/Image';
-import { IUnit } from '../../../Context/PostContext';
+import { IImage, IUnit } from '../../../Context/PostContext';
 
 interface IUnitFormProps {
   currentFormFields?: IUnit,
@@ -23,7 +23,8 @@ export interface IUnitFormFields {
   shape: string;
   material: string;
   story: string;
-  image: any;
+  images: any[];
+  coverImageIndex: any
 }
 
 const formFields = {
@@ -37,12 +38,15 @@ const formFields = {
   image: 'Pilt',
 };
 
-const UnitForm = (props: IUnitFormProps):JSX.Element => {
+const UnitForm = (props: IUnitFormProps): JSX.Element => {
   const { onSave, currentFormFields, isLoading } = props;
-
-  const [imagePreviewUri, setImagePreviewUri] = useState<string | undefined>(undefined);
+  const [imagePreviewUris, setImagePreviewUris] = useState<string[]>([]);
   const [formState, setFormState] = useState<IUnitFormFields>(
-    currentFormFields || {
+    (currentFormFields && {
+      ...currentFormFields,
+      coverImageIndex: currentFormFields.images.findIndex((i: IImage) => i.isCoverImage),
+    })
+    || {
       name: '',
       condition: '',
       location: '',
@@ -50,17 +54,22 @@ const UnitForm = (props: IUnitFormProps):JSX.Element => {
       shape: '',
       material: '',
       story: '',
-      image: null,
+      images: [],
+      coverImageIndex: 0,
     },
   );
 
   const readImageUri = (fileList: FileList | null): void => {
-    if (fileList && fileList.item(0)) {
-      const reader = new FileReader();
-      reader.onload = (ev) => {
-        setImagePreviewUri(ev.target?.result as string);
-      };
-      reader.readAsDataURL(fileList.item(0)!);
+    if (fileList && fileList.length) {
+      Array.from(fileList).forEach((f) => {
+        const reader = new FileReader();
+        reader.onload = (ev) => {
+          setImagePreviewUris((prevState) => [...prevState, ev.target?.result as string]);
+        };
+        reader.readAsDataURL(f);
+      });
+    } else {
+      setImagePreviewUris([]);
     }
   };
 
@@ -77,19 +86,33 @@ const UnitForm = (props: IUnitFormProps):JSX.Element => {
   };
 
   const handleFileInputChange = (e: React.ChangeEvent<HTMLInputElement>, field: keyof IUnitFormFields): void => {
+    setImagePreviewUris([]);
     readImageUri(e.target.files);
     setFormState((prevState) => ({
       ...prevState,
-      [field]: e.target.files?.item(0),
+      [field]: e.target.files,
     }));
   };
 
-  const renderImagePreview = (): JSX.Element | null => {
-    if (imagePreviewUri) {
-      return <Image src={imagePreviewUri} alt={formState.name} size="small" />;
+  const setPreviewIndex = (index: number): void => {
+    setFormState((prevState) => ({
+      ...prevState,
+      coverImageIndex: index,
+    }));
+  };
+
+  const renderImagePreview = (): JSX.Element[] | null => {
+    if (imagePreviewUris.length) {
+      return imagePreviewUris
+        .map((i, index) => (
+          <Image onClick={() => setPreviewIndex(index)} isHighlighted={formState.coverImageIndex === index} key={i} src={i} alt={formState.name} size="small" />
+        ));
     }
-    if (currentFormFields?.imageUrl) {
-      return <Image src={currentFormFields.imageUrl} alt={formState.name} size="small" />;
+    if (currentFormFields?.images) {
+      return currentFormFields.images
+        .map((i, index) => (
+          <Image onClick={() => setPreviewIndex(index)} isHighlighted={formState.coverImageIndex === index} key={i._id} src={i.imageUrl} alt={formState.name} size="small" />
+        ));
     }
     return null;
   };
@@ -154,9 +177,10 @@ const UnitForm = (props: IUnitFormProps):JSX.Element => {
         </Grid>
         <Grid direction="column">
           <InputField
+            multiple
             type="file"
             name={formFields.image}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleFileInputChange(e, 'image')}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleFileInputChange(e, 'images')}
           />
           {renderImagePreview()}
         </Grid>

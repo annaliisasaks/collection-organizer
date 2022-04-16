@@ -18,7 +18,8 @@ const Check = (props: ICheckProps): JSX.Element => {
   useEffect(() => {
     setChecked(isInCompare);
   }, [isInCompare]);
-  const handleCheck = (): void => {
+  const handleCheck = (e: React.ChangeEvent): void => {
+    e.stopPropagation();
     if (isInCompare) {
       deleteCompare(id);
     } else {
@@ -27,7 +28,8 @@ const Check = (props: ICheckProps): JSX.Element => {
   };
 
   return (
-    <label className="check">
+    // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-noninteractive-element-interactions
+    <label onClick={(e) => e.stopPropagation()} className="check">
       <input
         type="checkbox"
         name="checkbox"

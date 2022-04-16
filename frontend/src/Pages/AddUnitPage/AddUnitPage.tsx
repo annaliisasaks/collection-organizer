@@ -8,13 +8,13 @@ import Card from '../../components/Card/Card';
 import UnitForm, { IUnitFormFields } from '../../components/Templates/UnitForm/UnitForm';
 import API from '../../api';
 
-const AddUnitPage = ():JSX.Element => {
+const AddUnitPage = (): JSX.Element => {
   const [isLoading, setIsLoading] = useState(false);
   const { addUnit } = useContext(PostContext);
   const navigate = useNavigate();
   const onSave = (unit: IUnitFormFields): void => {
     const formData = new FormData();
-    formData.append('file', unit.image);
+    Array.from(unit.images).forEach((i) => formData.append('files', i));
     formData.append('name', unit.name);
     formData.append('condition', unit.condition);
     formData.append('location', unit.location);
@@ -22,6 +22,7 @@ const AddUnitPage = ():JSX.Element => {
     formData.append('material', unit.material);
     formData.append('story', unit.story);
     formData.append('shape', unit.shape);
+    formData.append('coverImageIndex', unit.coverImageIndex);
 
     setIsLoading(true);
     API.post('/unit', formData, { headers: { 'Content-Type': 'multipart/form-data' } })
@@ -31,7 +32,7 @@ const AddUnitPage = ():JSX.Element => {
         navigate('/');
       })
       .catch((e) => {
-        console.log(e);
+        console.error(e);
         setIsLoading(false);
       });
   };

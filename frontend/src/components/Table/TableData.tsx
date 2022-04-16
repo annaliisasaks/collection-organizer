@@ -16,10 +16,6 @@ const TableData = (props: ITableDataProps): JSX.Element => {
       classArray.push(className);
     }
 
-    if (onClick) {
-      classArray.push('table-data--clickable');
-    }
-
     return classArray.join(' ');
   };
 

@@ -3,11 +3,28 @@
     &--tiny {
         max-width: 60px;
     }
+
     &--small {
         max-width: 200px;
+        @media screen and (max-width: 1024px) {
+            max-width: 400px;
+        }
     }
+
     &--large {
         max-width: 300px;
+    }
+
+    &--xlarge {
+        max-width: 600px;
+    }
+
+    &--highlighted {
+        border: 5px solid rebeccapurple;
+    }
+
+    &--clickable {
+        cursor: pointer;
     }
 }
 

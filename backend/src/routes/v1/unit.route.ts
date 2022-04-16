@@ -19,7 +19,7 @@ router.get("/", authenticateAccessToken, unitController.getAll);
 router.get("/:id", authenticateAccessToken, unitController.getById);
 
 // Create a unit
-router.post("/", multer().single("file"), authenticateAccessToken, [...createAddUnitValidation()], (req, res) => {
+router.post("/", multer().array("files"), authenticateAccessToken, [...createAddUnitValidation()], (req, res) => {
     const validationErrors = validationResult(req);
     if (!validationErrors.isEmpty()) {
         return res.status(422).json({
@@ -30,7 +30,7 @@ router.post("/", multer().single("file"), authenticateAccessToken, [...createAdd
 });
 
 // Edit unit
-router.put("/:id", multer().single("file"), authenticateAccessToken, [...createAddUnitValidation()], async (req, res) => {
+router.put("/:id", multer().array("files"), authenticateAccessToken, [...createAddUnitValidation()], async (req, res) => {
     const validationErrors = validationResult(req);
     if (!validationErrors.isEmpty()) {
         return res.status(422).json({

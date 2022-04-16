@@ -49,35 +49,39 @@ const UnitTable = (props: IUnitTableProps): JSX.Element => {
             </TableHead>
           </TableRow>
 
-          {data.map((unit, index) => (
-
-            <TableRow key={unit._id}>
-              <TableData onClick={() => navigate(`/kirje/${unit._id}`)}>
-                {index + 1}
-              </TableData>
-              <TableData>
-                {unit.imageUrl && <Image src={unit.imageUrl} alt={unit.name} size="tiny" />}
-              </TableData>
-              <TableData onClick={() => navigate(`/kirje/${unit._id}`)}>
-                {unit.name}
-              </TableData>
-              <TableData onClick={() => navigate(`/kirje/${unit._id}`)}>
-                {unit.condition}
-              </TableData>
-              <TableData onClick={() => navigate(`/kirje/${unit._id}`)}>
-                {unit.location}
-              </TableData>
-              <TableData onClick={() => navigate(`/kirje/${unit._id}`)}>
-                {unit.size}
-              </TableData>
-              <TableData onClick={() => navigate(`/kirje/${unit._id}`)}>
-                {unit.material}
-              </TableData>
-              <TableData>
-                <Check id={unit._id} />
-              </TableData>
-            </TableRow>
-          ))}
+          {data.map((unit, index) => {
+            const coverImage = unit.images.find((i) => i.isCoverImage);
+            return (
+              <TableRow onClick={() => navigate(`/kirje/${unit._id}`)} key={unit._id}>
+                <TableData>
+                  {index + 1}
+                </TableData>
+                <TableData>
+                  {coverImage
+                    ? <Image src={coverImage.imageUrl} alt={unit.name} size="tiny" />
+                    : unit.images && <Image src={unit.images[0].imageUrl} alt={unit.name} size="tiny" />}
+                </TableData>
+                <TableData>
+                  {unit.name}
+                </TableData>
+                <TableData>
+                  {unit.condition}
+                </TableData>
+                <TableData>
+                  {unit.location}
+                </TableData>
+                <TableData>
+                  {unit.size}
+                </TableData>
+                <TableData>
+                  {unit.material}
+                </TableData>
+                <TableData>
+                  <Check id={unit._id} />
+                </TableData>
+              </TableRow>
+            );
+          })}
         </tbody>
       </Table>
     </div>

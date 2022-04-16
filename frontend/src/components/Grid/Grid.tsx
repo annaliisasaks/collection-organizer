@@ -8,11 +8,12 @@ interface IGridProps {
   gap?: 'small' | 'medium',
   align?: 'start' | 'center' | 'end',
   between?: boolean,
+  width?: 'max' | 'medium' | 'small',
 }
 
 const Grid = (props: IGridProps): JSX.Element => {
   const {
-    children, direction, className, gap, align, between,
+    children, direction, className, gap, align, between, width,
   } = props;
   const BEM = (): string => {
     const classArray: string[] = ['grid'];
@@ -35,6 +36,10 @@ const Grid = (props: IGridProps): JSX.Element => {
 
     if (between) {
       classArray.push('grid--between');
+    }
+
+    if (width) {
+      classArray.push(`grid--${width}`);
     }
 
     return classArray.join(' ');
