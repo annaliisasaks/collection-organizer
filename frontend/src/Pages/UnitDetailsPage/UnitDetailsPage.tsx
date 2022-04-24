@@ -9,6 +9,7 @@ import Image from '../../components/Image/Image';
 import Separator from '../../components/Separator/Separator';
 import API from '../../api';
 import './unitDetailsPage.scss';
+import GridColumn from '../../components/Grid/GridColumn';
 
 const UnitDetailsPage = ():JSX.Element => {
   const { id } = useParams();
@@ -41,58 +42,70 @@ const UnitDetailsPage = ():JSX.Element => {
     <Content>
       {selectedUnit && (
         <Card fullWidth>
-          <Grid gap="medium">
 
-            <Grid direction="column" gap="medium">
-              {bigPicture && <Image src={bigPicture.imageUrl} alt={selectedUnit.name} size="xlarge" className="unit-page__main-image" />}
-              <Grid>
-                {selectedUnit.images.map((i) => (
-                  <Grid width="small" gap="small">
-                    <Image
-                      key={i._id}
-                      src={i.imageUrl}
-                      alt={selectedUnit.name}
-                      size="small"
-                      onClick={() => setBigPicture(i)}
-                    />
-                  </Grid>
-                ))}
-              </Grid>
+          <GridColumn className="unit-page__images">
+
+            <Grid>
+              <GridColumn>
+
+                {bigPicture && <Image src={bigPicture.imageUrl} alt={selectedUnit.name} size="xlarge" className="unit-page__main-image" />}
+                <Grid>
+                  {selectedUnit.images.map((i) => (
+                    <GridColumn>
+                      <Image
+                        key={i._id}
+                        src={i.imageUrl}
+                        alt={selectedUnit.name}
+                        size="small"
+                        onClick={() => setBigPicture(i)}
+                      />
+                    </GridColumn>
+
+                  ))}
+
+                </Grid>
+              </GridColumn>
+
             </Grid>
+          </GridColumn>
 
-            <Grid direction="column" width="medium">
-              <h2>{selectedUnit.name}</h2>
-              <p>
-                Seisukord:
-                {' '}
-                {selectedUnit.condition}
-                <Separator color="transparent" type="hr" size="xsmall" />
+          <GridColumn width={['xs-6']}>
 
-                Asukoht:
-                {' '}
-                {selectedUnit.location}
-                <Separator color="transparent" type="hr" size="xsmall" />
+            <h2>{selectedUnit.name}</h2>
+            <p>
+              Seisukord:
+              {' '}
+              {selectedUnit.condition}
+              <Separator color="transparent" type="hr" size="xsmall" />
 
-                Suurus:
-                {' '}
-                {selectedUnit.size}
-                <Separator color="transparent" type="hr" size="xsmall" />
+              Asukoht:
+              {' '}
+              {selectedUnit.location}
+              <Separator color="transparent" type="hr" size="xsmall" />
 
-                Kuju:
-                {' '}
-                {selectedUnit.shape}
-                <Separator color="transparent" type="hr" size="xsmall" />
+              Suurus:
+              {' '}
+              {selectedUnit.size}
+              <Separator color="transparent" type="hr" size="xsmall" />
 
-                Materjal:
-                {' '}
-                {selectedUnit.material}
-                <Separator color="transparent" type="hr" />
-                Lugu:
-                {' '}
-                {selectedUnit.story}
-              </p>
-            </Grid>
-            <Grid between direction="column" gap="small" width="medium">
+              Kuju:
+              {' '}
+              {selectedUnit.shape}
+              <Separator color="transparent" type="hr" size="xsmall" />
+
+              Materjal:
+              {' '}
+              {selectedUnit.material}
+            </p>
+            <p className="unit-page__story">
+              Lugu:
+              {' '}
+              {selectedUnit.story}
+            </p>
+          </GridColumn>
+          <GridColumn className="unit-page__buttons">
+
+            <Grid between direction="column" gap="small">
 
               <Grid align="end" gap="small" direction="column">
                 <Button purpose="delete" onClick={() => handleUnitDelete(selectedUnit._id)}>Kustuta</Button>
@@ -103,7 +116,8 @@ const UnitDetailsPage = ():JSX.Element => {
               </Grid>
 
             </Grid>
-          </Grid>
+
+          </GridColumn>
 
         </Card>
 

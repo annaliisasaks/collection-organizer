@@ -2,6 +2,7 @@
     display: flex;
     flex-direction: row;
     width: 100%;
+    flex-wrap: wrap;
 
     &--column {
         flex-direction: column;
@@ -47,7 +48,28 @@
         }
     }
 
-    @media (max-width: 1024px) {
-        flex-direction: column;
+}
+
+.grid-column--lg-3 {
+    @media (min-width: 1024px) {
+        flex-basis: 24%;
+    }
+}
+
+.grid-column--xs-6 {
+    @media (max-width: 480px) {
+        flex-basis: 49%;
+    }
+}
+
+.grid-column--lg-2 {
+    @media (min-width: 1024px) {
+        flex-basis: 20%;
+    }
+}
+
+.grid-column--lg-4 {
+    @media (min-width: 1024px) {
+        flex-basis: 32%;
     }
 }

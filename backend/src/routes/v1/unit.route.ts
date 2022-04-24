@@ -15,6 +15,9 @@ const router = express.Router();
 // Get all units
 router.get("/", authenticateAccessToken, unitController.getAll);
 
+// Get all iamges
+router.get("/images", authenticateAccessToken, unitController.getAllImages)
+
 // Get by id
 router.get("/:id", authenticateAccessToken, unitController.getById);
 

@@ -1,5 +1,23 @@
 .unit-page__main-image {
     @media screen and (max-width: 1024px) {
         display: none;
-      }
+    }
+}
+
+.unit-page__story {
+  max-width: 600px;
+}
+
+.unit-page__images {
+  padding-right: 20px;
+}
+
+div.image.image--small {
+  @media screen and (max-width: 1024px) {
+    max-width: inherit;
+  }
+}
+
+.unit-page__buttons {
+  margin-left: auto;
 }

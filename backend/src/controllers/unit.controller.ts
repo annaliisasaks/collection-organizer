@@ -60,4 +60,13 @@ const deleteById = (req: TypedRequestParams, res: Response) => {
         })
 }
 
-export { addUnit, getAll, getById, deleteById, editUnit };
+const getAllImages = (req: Request, res: Response) => {
+    Unit.find()
+        .then((units: IUnit[]) => {
+            const allImages = units.flatMap(u => u.images)
+            sendResourceFoundResponse(res, allImages);
+        })
+        .catch(() => sendResourceNotFoundResponse(res))
+}
+
+export { addUnit, getAll, getById, deleteById, editUnit, getAllImages };

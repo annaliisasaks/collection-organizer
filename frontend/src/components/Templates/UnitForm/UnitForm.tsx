@@ -8,6 +8,7 @@ import Separator from '../../Separator/Separator';
 import './unitForm.scss';
 import Image from '../../Image/Image';
 import { IImage, IUnit } from '../../../Context/PostContext';
+import GridColumn from '../../Grid/GridColumn';
 
 interface IUnitFormProps {
   currentFormFields?: IUnit,
@@ -119,71 +120,97 @@ const UnitForm = (props: IUnitFormProps): JSX.Element => {
 
   return (
     <form onSubmit={(e) => addUnitHandler(e)} className="unit-form">
-      <Grid gap="medium">
-        <Grid direction="column" gap="medium">
-          <InputField
-            type="text"
-            name="name"
-            placeholder={formFields.name}
-            defaultValue={formState?.name}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleInputChange(e, 'name')}
-            required
-          />
-          <InputField
-            type="text"
-            name="condition"
-            placeholder={formFields.condition}
-            defaultValue={formState?.condition}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleInputChange(e, 'condition')}
-          />
-          <InputField
-            type="text"
-            name="location"
-            placeholder={formFields.location}
-            defaultValue={formState?.location}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleInputChange(e, 'location')}
-          />
-          <Textarea
-            rows={7}
-            cols={5}
-            name="story"
-            placeholder={formFields.story}
-            defaultValue={formState?.story}
-            onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => handleInputChange(e, 'story')}
-          />
-        </Grid>
-        <Grid direction="column" gap="medium">
-          <InputField
-            type="text"
-            name="size"
-            placeholder={formFields.size}
-            defaultValue={formState?.size}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleInputChange(e, 'size')}
-          />
-          <InputField
-            type="text"
-            name="shape"
-            placeholder={formFields.shape}
-            defaultValue={formState?.shape}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleInputChange(e, 'shape')}
-          />
-          <InputField
-            type="text"
-            name="material"
-            placeholder={formFields.material}
-            defaultValue={formState?.material}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleInputChange(e, 'material')}
-          />
-        </Grid>
-        <Grid direction="column">
-          <InputField
-            multiple
-            type="file"
-            name={formFields.image}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleFileInputChange(e, 'images')}
-          />
-          {renderImagePreview()}
-        </Grid>
+      <Grid gap="medium" className="unit-form__input">
+        <GridColumn width={['lg-4']}>
+          <Grid direction="column" gap="medium">
+            <GridColumn>
+              <InputField
+                type="text"
+                name="name"
+                placeholder={formFields.name}
+                defaultValue={formState?.name}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleInputChange(e, 'name')}
+                required
+              />
+            </GridColumn>
+            <GridColumn>
+
+              <InputField
+                type="text"
+                name="condition"
+                placeholder={formFields.condition}
+                defaultValue={formState?.condition}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleInputChange(e, 'condition')}
+              />
+
+            </GridColumn>
+            <GridColumn>
+              <InputField
+                type="text"
+                name="location"
+                placeholder={formFields.location}
+                defaultValue={formState?.location}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleInputChange(e, 'location')}
+              />
+            </GridColumn>
+            <GridColumn>
+              <Textarea
+                rows={7}
+                cols={25}
+                name="story"
+                placeholder={formFields.story}
+                defaultValue={formState?.story}
+                onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => handleInputChange(e, 'story')}
+              />
+            </GridColumn>
+
+          </Grid>
+
+        </GridColumn>
+        <GridColumn width={['lg-4']}>
+          <Grid direction="column" gap="medium">
+            <GridColumn>
+              <InputField
+                type="text"
+                name="size"
+                placeholder={formFields.size}
+                defaultValue={formState?.size}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleInputChange(e, 'size')}
+              />
+            </GridColumn>
+            <GridColumn>
+              <InputField
+                type="text"
+                name="shape"
+                placeholder={formFields.shape}
+                defaultValue={formState?.shape}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleInputChange(e, 'shape')}
+              />
+            </GridColumn>
+            <GridColumn>
+              <InputField
+                type="text"
+                name="material"
+                placeholder={formFields.material}
+                defaultValue={formState?.material}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleInputChange(e, 'material')}
+              />
+            </GridColumn>
+
+          </Grid>
+        </GridColumn>
+        <GridColumn width={['lg-4']}>
+          <Grid direction="column">
+            <InputField
+              multiple
+              type="file"
+              name={formFields.image}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleFileInputChange(e, 'images')}
+            />
+            {renderImagePreview()}
+          </Grid>
+        </GridColumn>
+
       </Grid>
       <Separator type="div" color="transparent" />
       {isLoading ? <Loader /> : <Button className="unit-form__button" purpose="primary" type="submit">{currentFormFields ? 'Muuda' : 'Lisa'}</Button>}

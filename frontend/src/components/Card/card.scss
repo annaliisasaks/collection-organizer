@@ -9,7 +9,7 @@
     box-shadow: 0 2px 5px $primaryColor;
     color: $white;
 
-    @media (max-width: 600px) {
+    @media (max-width: 700px) {
         flex-direction: column;
     }
 
@@ -33,5 +33,9 @@
 
     &--wide {
         width: 100%;
+    }
+
+    &--clickable {
+        cursor: pointer;
     }
 }

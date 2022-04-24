@@ -13,11 +13,12 @@ interface ICardProps {
   borderRadius?: ICardBorderRadiusProps;
   padding?: 'medium'
   fullWidth?: boolean
+  onClick?: (event: React.MouseEvent) => void,
 }
 
 const Card = (props: ICardProps): JSX.Element => {
   const {
-    children, className, backgroundColor, borderRadius, padding, fullWidth,
+    children, className, backgroundColor, borderRadius, padding, fullWidth, onClick,
   } = props;
 
   const BEM = (): string => {
@@ -47,11 +48,15 @@ const Card = (props: ICardProps): JSX.Element => {
       classArray.push('card--wide');
     }
 
+    if (onClick) {
+      classArray.push('card--clickable');
+    }
+
     return classArray.join(' ');
   };
 
   return (
-    <div className={BEM()}>{children}</div>
+    <div {...props} className={BEM()}>{children}</div>
   );
 };
 
