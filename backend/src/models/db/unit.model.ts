@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import mongoosePaginate from "mongoose-paginate-v2";
 
 export interface IImage {
   imageUrl: string, 
@@ -6,7 +7,7 @@ export interface IImage {
   isCoverImage: boolean
 }
 
-export interface IUnit {
+export interface IUnit extends mongoose.Document {
     name: string;
     condition: string;
     location: string;
@@ -17,8 +18,6 @@ export interface IUnit {
     images: IImage[],
     coverImageIndex: number;
 }
-
-interface UnitDocument extends IUnit, mongoose.Document {}
 
 const UnitImageSchema = new mongoose.Schema({
   imageUrl: {
@@ -76,4 +75,6 @@ const UnitSchema = new mongoose.Schema({
     timestamps: { createdAt: true, updatedAt: true }
 });
 
-export default mongoose.model<UnitDocument>("Unit", UnitSchema);
+UnitSchema.plugin(mongoosePaginate);
+
+export default mongoose.model<IUnit, mongoose.PaginateModel<IUnit>>("Unit", UnitSchema);

@@ -1,6 +1,7 @@
 import { Response, Request } from "express";
+import { PaginateResult } from "mongoose";
 import { TypedRequestBody, TypedRequestParams } from '../models/requests/types';
-import Unit, { IImage, IUnit } from "../models/db/unit.model";
+import Unit, { IUnit } from "../models/db/unit.model";
 import { deleteFileFromS3 } from "../services/s3.service"
 import { sendResourceCreatedResponse, send400Response, sendResourceFoundResponse, sendGetFailedResponse, sendResourceNotFoundResponse, sendResourceDeletedResponse } from "../models/repsponse/response";
 import { uploadFilesFromRequest } from "../services/file.upload.service";
@@ -60,11 +61,15 @@ const deleteById = (req: TypedRequestParams, res: Response) => {
         })
 }
 
-const getAllImages = (req: Request, res: Response) => {
-    Unit.find()
-        .then((units: IUnit[]) => {
-            const allImages = units.flatMap(u => u.images)
-            sendResourceFoundResponse(res, allImages);
+const getAllImages = (req: TypedRequestParams, res: Response) => {
+    const options = {
+        page: req.query.page || 1,
+        limit: 12
+    }
+    Unit.paginate({}, options)
+        .then((pagiantedImages: PaginateResult<IUnit>) => {
+            const mappedPagiantedImages = {...pagiantedImages, docs: pagiantedImages.docs.map(u => ({images: u.images, _id: u._id, name: u.name}))};
+            sendResourceFoundResponse(res, mappedPagiantedImages)
         })
         .catch(() => sendResourceNotFoundResponse(res))
 }

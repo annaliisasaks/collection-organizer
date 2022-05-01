@@ -7,11 +7,12 @@ interface Props {
   onClick?: (event: React.MouseEvent) => void,
   type?: 'submit'
   purpose: 'primary' | 'secondary' | 'delete'
+  disabled?: boolean
 }
 
 const Button = (props: Props):JSX.Element => {
   const {
-    children, className, onClick, type, purpose,
+    children, className, onClick, type, purpose, disabled,
   } = props;
 
   const BEM = (): string => {
@@ -19,6 +20,10 @@ const Button = (props: Props):JSX.Element => {
 
     if (purpose) {
       classArray.push(`button--${purpose}`);
+    }
+
+    if (disabled) {
+      classArray.push('button--disabled');
     }
 
     if (className) {
@@ -30,7 +35,7 @@ const Button = (props: Props):JSX.Element => {
 
   return (
     // eslint-disable-next-line react/button-has-type
-    <button className={BEM()} type={type || 'button'} onClick={onClick}>{children}</button>
+    <button className={BEM()} type={type || 'button'} onClick={onClick} disabled={disabled}>{children}</button>
   );
 };
 

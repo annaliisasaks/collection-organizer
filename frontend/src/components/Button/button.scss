@@ -12,7 +12,7 @@
     &--primary {
         background: white;
         &:hover {
-            background: $secondaryColor
+            opacity: 90%;
         }
     }
     &--secondary {
@@ -25,6 +25,15 @@
         background: #FF0000;
         &:hover {
             background: lighten(#FF0000, 15%)
+        }
+    }
+
+    &--disabled {
+        color: grey;
+        cursor: inherit;
+
+        &:hover {
+            background-color: white;
         }
     }
 }

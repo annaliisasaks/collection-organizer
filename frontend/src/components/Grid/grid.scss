@@ -28,8 +28,12 @@
         align-items: flex-end;
     }
 
-    &--between {
+    &--justify-between {
         justify-content: space-between;
+    }
+
+    &--justify-center {
+        justify-content: center;
     }
 
     &--medium {

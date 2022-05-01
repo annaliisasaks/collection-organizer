@@ -19,6 +19,32 @@ export interface IUnit {
   images: IImage[]
 }
 
+export interface IGalleryItem {
+  _id: string;
+  name: string;
+  images: IImage[];
+}
+
+export interface IPaginationWrapper<T = any> extends IInitialPaginationData {
+  docs: T,
+  limit: number;
+  pagingCounter: number;
+  totalDocs: number;
+}
+
+export interface IPagaintionParams {
+  page: null | number
+}
+
+export interface IInitialPaginationData {
+  hasNextPage:boolean;
+  hasPrevPage: boolean;
+  page: number;
+  totalPages: number;
+  nextPage: number | null;
+  prevPage: number | null;
+}
+
 interface Props {
     children:React.ReactNode;
 }
