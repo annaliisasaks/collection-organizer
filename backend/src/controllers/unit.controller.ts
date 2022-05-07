@@ -1,9 +1,9 @@
-import { Response, Request } from "express";
+import { Response } from "express";
 import { PaginateResult } from "mongoose";
 import { TypedRequestBody, TypedRequestParams } from '../models/requests/types';
 import Unit, { IUnit } from "../models/db/unit.model";
 import { deleteFileFromS3 } from "../services/s3.service"
-import { sendResourceCreatedResponse, send400Response, sendResourceFoundResponse, sendGetFailedResponse, sendResourceNotFoundResponse, sendResourceDeletedResponse } from "../models/repsponse/response";
+import { sendResourceCreatedResponse, send400Response, sendResourceFoundResponse, sendResourceNotFoundResponse, sendResourceDeletedResponse } from "../models/repsponse/response";
 import { uploadFilesFromRequest } from "../services/file.upload.service";
 
 const getById = (req: TypedRequestParams, res: Response) => {
@@ -13,10 +13,20 @@ const getById = (req: TypedRequestParams, res: Response) => {
         .catch(() => sendResourceNotFoundResponse(res))
 }
 
-const getAll = (req: Request, res: Response) => {
-    Unit.find()
-        .then((units) => sendResourceFoundResponse(res, units))
-        .catch((error) => sendGetFailedResponse(res, error));
+const getAll = (req: TypedRequestParams, res: Response) => {
+    const query = {}
+    if (req.query.property && req.query.value) {
+        query[req.query.property] = { $regex: new RegExp(req.query.value), $options: "i" }
+    }
+    const options = {
+        page: req.query.page || 1,
+        limit: 12
+    }
+    Unit.paginate(query, options)
+        .then((paginatedUnits: PaginateResult<IUnit>) => {
+            sendResourceFoundResponse(res, paginatedUnits)
+        })
+        .catch(() => sendResourceNotFoundResponse(res))
 }
 
 const addUnit = async (req: TypedRequestBody<IUnit>, res: Response) => {

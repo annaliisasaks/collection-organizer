@@ -55,7 +55,6 @@ const Header = (): JSX.Element => {
           {renderNavButton(isMenuOpen)}
           Menüü
         </button>
-
         <List
           className={`header__nav-list ${isMenuOpen ? 'header__nav-list--open' : ''}`}
         >
@@ -74,15 +73,10 @@ const Header = (): JSX.Element => {
             className="header__log-out-button"
           >
             Logi välja
-
           </Button>
-
         </List>
-
       </nav>
-
     </header>
-
   );
 };
 

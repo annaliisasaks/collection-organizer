@@ -7,5 +7,5 @@ export interface TypedRequestBody<T = any> extends Express.Request {
 
 export interface TypedRequestParams extends Express.Request {
     params: { id?: string },
-    query: { page?: number }
+    query: { page?: number, property?: string, value?: string }
 }

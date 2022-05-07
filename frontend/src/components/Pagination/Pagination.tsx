@@ -1,37 +1,35 @@
 import React from 'react';
+import { IInitialPaginationData } from '../../Context/PostContext';
 import Button from '../Button/Button';
 import './pagination.scss';
 
 interface IPaginationProps {
-    hasNextPage: boolean;
-    hasPrevPage: boolean;
-    page: number;
-    totalPages: number;
+    paginationData: IInitialPaginationData;
     onNextClick: () => void;
     onPrevClick: () => void;
 }
 
 const Pagination = (props: IPaginationProps): JSX.Element => {
   const {
-    hasNextPage, hasPrevPage, page, totalPages, onNextClick, onPrevClick,
+    paginationData, onNextClick, onPrevClick,
   } = props;
   return (
     <div className="pagination">
       <Button
         onClick={onPrevClick}
-        disabled={!hasPrevPage}
+        disabled={!paginationData.hasPrevPage}
         purpose="primary"
       >
         Eelmine
 
       </Button>
-      {page}
+      {paginationData.page}
       /
-      {totalPages}
+      {paginationData.totalPages}
 
       <Button
         onClick={onNextClick}
-        disabled={!hasNextPage}
+        disabled={!paginationData.hasNextPage}
         purpose="primary"
       >
         Järgmine

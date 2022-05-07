@@ -25,7 +25,7 @@ export interface IUnitFormFields {
   material: string;
   story: string;
   images: any[];
-  coverImageIndex: any
+  coverImageIndex: any;
 }
 
 const formFields = {

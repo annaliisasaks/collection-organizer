@@ -14,7 +14,7 @@ interface Props {
 
 const Textarea = (props: Props):JSX.Element => {
   const {
-    className, defaultValue,
+    className, defaultValue, ...rest
   } = props;
   const BEM = (): string => {
     const classArray: string[] = ['textarea'];
@@ -25,7 +25,7 @@ const Textarea = (props: Props):JSX.Element => {
     return classArray.join(' ');
   };
   return (
-    <textarea className={BEM()} defaultValue={defaultValue || ''} {...props} />
+    <textarea className={BEM()} defaultValue={defaultValue || ''} {...rest} />
   );
 };
 export default Textarea;

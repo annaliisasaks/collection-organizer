@@ -25,7 +25,7 @@ const LoginButton = (): JSX.Element => {
       });
   };
 
-  const handleLoginFailure = (e: any): void => {
+  const handleLoginFailure = (e: unknown): void => {
     console.error('Failure: ', e);
     removeAuthorizationHeader();
     setIsLoggedIn(false);

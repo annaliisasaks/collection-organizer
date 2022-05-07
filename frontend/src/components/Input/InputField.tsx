@@ -14,7 +14,7 @@ interface Props {
 
 const InputField = (props: Props): JSX.Element => {
   const {
-    className, onChange, defaultValue, multiple,
+    className, onChange, defaultValue, multiple, ...rest
   } = props;
   const BEM = (): string => {
     const classArray: string[] = ['input-field'];
@@ -27,7 +27,7 @@ const InputField = (props: Props): JSX.Element => {
   };
 
   return (
-    <input className={BEM()} multiple={multiple} onChange={onChange} defaultValue={defaultValue || ''} {...props} />
+    <input className={BEM()} multiple={multiple} onChange={onChange} value={defaultValue} {...rest} />
   );
 };
 

@@ -5,11 +5,6 @@ export const sendResourceFoundResponse = (res: Response, data: any | any[]) => {
     res.send(data);
 }
 
-export const sendGetFailedResponse = (res: Response, error: any) => {
-    res.status(500);
-    res.send({error});
-}
-
 export const sendResourceCreatedResponse = (res: Response, data: any) => {
     res.status(201);
     res.send(data);

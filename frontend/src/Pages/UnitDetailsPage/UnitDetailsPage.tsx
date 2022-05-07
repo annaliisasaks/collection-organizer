@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { AxiosResponse } from 'axios';
-import { IImage, IUnit, UnitContext } from '../../Context/PostContext';
+import { IUnit, UnitContext } from '../../Context/PostContext';
 import Button from '../../components/Button/Button';
 import Content from '../../components/Content/Content';
 import Card from '../../components/Card/Card';
@@ -27,7 +27,6 @@ const UnitDetailsPage = ():JSX.Element => {
         navigate('/');
       })
       .catch(console.error);
-    // deleteUnit(deletedId);
   };
 
   const getUnitById = (unitId: string): void => {
@@ -81,11 +80,10 @@ const UnitDetailsPage = ():JSX.Element => {
 
             </Grid>
           </GridColumn>
-
-          <GridColumn width={['xs-6']}>
+          <GridColumn className="unit-page__data">
 
             <h2>{selectedUnit.name}</h2>
-            <p>
+            <div>
               Seisukord:
               {' '}
               {selectedUnit.condition}
@@ -109,7 +107,7 @@ const UnitDetailsPage = ():JSX.Element => {
               Materjal:
               {' '}
               {selectedUnit.material}
-            </p>
+            </div>
             <p className="unit-page__story">
               Lugu:
               {' '}

@@ -25,9 +25,8 @@ export interface IGalleryItem {
   images: IImage[];
 }
 
-export interface IPaginationWrapper<T = any> extends IInitialPaginationData {
+export interface IPaginationWrapper<T = unknown> extends IInitialPaginationData {
   docs: T,
-  limit: number;
   pagingCounter: number;
   totalDocs: number;
 }
@@ -36,13 +35,18 @@ export interface IPagaintionParams {
   page: null | number
 }
 
+export interface IFilterQueryParams {
+  [k: string]: string
+}
+
 export interface IInitialPaginationData {
-  hasNextPage:boolean;
+  hasNextPage: boolean;
   hasPrevPage: boolean;
   page: number;
   totalPages: number;
   nextPage: number | null;
   prevPage: number | null;
+  limit: number;
 }
 
 interface Props {
@@ -61,6 +65,16 @@ interface IUnitContext {
   setUnits: (units: IUnit[]) => void;
 
 }
+
+export const initialPaginationData: IInitialPaginationData = {
+  hasNextPage: false,
+  hasPrevPage: false,
+  page: 0,
+  totalPages: 0,
+  nextPage: null,
+  prevPage: null,
+  limit: 0,
+};
 
 const unitContextInitial = {
   units: [],

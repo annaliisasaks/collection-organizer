@@ -18,8 +18,9 @@ interface ICardProps {
 
 const Card = (props: ICardProps): JSX.Element => {
   const {
-    children, className, backgroundColor, borderRadius, padding, fullWidth, onClick,
+    children, className, backgroundColor, borderRadius, padding, onClick,
   } = props;
+  const { fullWidth, ...rest } = props;
 
   const BEM = (): string => {
     const classArray: string[] = ['card'];
@@ -56,7 +57,7 @@ const Card = (props: ICardProps): JSX.Element => {
   };
 
   return (
-    <div {...props} className={BEM()}>{children}</div>
+    <div {...rest} className={BEM()}>{children}</div>
   );
 };
 

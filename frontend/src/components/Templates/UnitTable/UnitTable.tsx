@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { IUnit } from '../../../Context/PostContext';
 import Check from '../../Check/Check';
 import Image from '../../Image/Image';
@@ -11,10 +11,12 @@ import './unitTable.scss';
 
 interface IUnitTableProps {
   data: IUnit[];
+  pageLimit: number;
+  currentPage: number;
 }
 
 const UnitTable = (props: IUnitTableProps): JSX.Element => {
-  const { data } = props;
+  const { data, pageLimit, currentPage } = props;
   const navigate = useNavigate();
 
   return (
@@ -57,7 +59,7 @@ const UnitTable = (props: IUnitTableProps): JSX.Element => {
             return (
               <TableRow onClick={() => navigate(`/kirje/${unit._id}`)} key={unit._id}>
                 <TableData>
-                  {index + 1}
+                  {(currentPage - 1) * pageLimit + (index + 1)}
                 </TableData>
                 <TableData>
                   {coverImage

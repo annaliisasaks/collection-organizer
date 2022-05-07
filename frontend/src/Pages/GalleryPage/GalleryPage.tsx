@@ -6,22 +6,13 @@ import Image from '../../components/Image/Image';
 import Card from '../../components/Card/Card';
 import Content from '../../components/Content/Content';
 import {
-  IGalleryItem, IInitialPaginationData, IPagaintionParams, IPaginationWrapper, IUnit,
+  IGalleryItem, IInitialPaginationData, initialPaginationData, IPagaintionParams, IPaginationWrapper,
 } from '../../Context/PostContext';
 import Grid from '../../components/Grid/Grid';
 import GridColumn from '../../components/Grid/GridColumn';
 import './galleryPage.scss';
 import Pagination from '../../components/Pagination/Pagination';
-import Select from '../../components/Select/Select';
-
-const initialPaginationData: IInitialPaginationData = {
-  hasNextPage: false,
-  hasPrevPage: false,
-  page: 0,
-  totalPages: 0,
-  nextPage: null,
-  prevPage: null,
-};
+import Loader from '../../components/Loader/Loader';
 
 const GalleryPage = ():JSX.Element => {
   const [units, setUnits] = useState<IGalleryItem[]>([]);
@@ -60,13 +51,20 @@ const GalleryPage = ():JSX.Element => {
     getImages({ page: paginationData.prevPage });
   };
 
+  if (isLoading) {
+    return <Loader />;
+  }
+
   return (
     <Content direction="column">
       <h1 className="sr-only">Galerii</h1>
       <Grid gap="small">
-        {units.map((unit, index) => (
-          <GridColumn width={['lg-3', 'xs-6']} key={index}>
-            <Card className="gallery__card" onClick={() => navigate(`/kirje/${unit._id}`)}>
+        {units.map((unit) => (
+          <GridColumn width={['lg-3', 'xs-6']} key={unit._id}>
+            <Card
+              className="gallery__card"
+              onClick={() => navigate(`/kirje/${unit._id}`)}
+            >
               <Grid direction="column" gap="small" align="center">
                 <Image
                   src={getImageSrc(unit)}
@@ -83,10 +81,7 @@ const GalleryPage = ():JSX.Element => {
             <Pagination
               onNextClick={handleNextClick}
               onPrevClick={handlePrevClick}
-              hasNextPage={paginationData.hasNextPage}
-              hasPrevPage={paginationData.hasPrevPage}
-              page={paginationData.page}
-              totalPages={paginationData.totalPages}
+              paginationData={paginationData}
             />
           </Grid>
         )}
