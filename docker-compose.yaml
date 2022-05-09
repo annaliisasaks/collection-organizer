@@ -1,0 +1,61 @@
+version: "3"
+services:
+ 
+  db:
+    image: mongo
+    ports:
+      - 27017:27017
+    networks:
+      - my-network
+ 
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+      args:
+       - DB_HOST=${DB_HOST}
+       - DB_USER=${DB_USER}
+       - DB_PASSWORD=${DB_PASSWORD}
+       - DB_NAME=${DB_NAME}
+       - DB_PORT=${DB_PORT}
+       - SERVER_PORT=${SERVER_PORT}
+       - LOGIN_EMAIL_WHITELIST=${LOGIN_EMAIL_WHITELIST}
+       - OAUTH_CLIENT_ID=${OAUTH_CLIENT_ID}
+       - OAUTH_CLIENT_SECRET=${OAUTH_CLIENT_SECRET}
+       - JWT_SECRET=${JWT_SECRET}
+       - S3_ID=${S3_ID}
+       - S3_SECRET=${S3_SECRET}
+       - S3_BUCKET_NAME=${S3_BUCKET_NAME}
+    image: "backend:1.0.0"
+    networks:
+      - my-network
+    depends_on:
+      - db
+ 
+  frontend:
+    build:
+       context: ./frontend
+       dockerfile: Dockerfile
+       args:
+        - BASE_URL=${BASE_URL}
+        - GOOGLE_CLIENT_ID=${GOOGLE_CLIENT_ID}
+    image: "frontend:1.0.0"    
+    networks:
+      -  my-network
+ 
+  revproxy:
+    image: nginx:1.20.2-alpine
+    ports:
+      - 80:80
+    volumes:
+      - ./frontend/build:/usr/share/nginx/html  
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - frontend
+      - backend
+    networks:
+      - my-network
+ 
+networks:
+  my-network:
+    driver: bridge
