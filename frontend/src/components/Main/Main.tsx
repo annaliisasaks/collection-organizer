@@ -6,6 +6,7 @@ import UnitContext, {
   IInitialPaginationData, initialPaginationData, IPagaintionParams, IPaginationWrapper, IUnit,
 } from '../../Context/PostContext';
 import Card from '../Card/Card';
+import Grid from '../Grid/Grid';
 import Loader from '../Loader/Loader';
 import Pagination from '../Pagination/Pagination';
 import Search from '../Search/Search';
@@ -74,7 +75,6 @@ const Main = (): JSX.Element => {
 
   const handleSearch = (_query: { input: string, category: string }): void => {
     const filterQueryParams: IFilterQueryParams = { property: _query.category, value: _query.input };
-    console.log(filterQueryParams);
     getUnits(undefined, filterQueryParams);
   };
 
@@ -90,7 +90,9 @@ const Main = (): JSX.Element => {
         : (
           <>
             <UnitTable data={filteredUnits} pageLimit={paginationData.limit} currentPage={paginationData.page} />
-            <Pagination onNextClick={handleNextClick} onPrevClick={handlePrevClick} paginationData={paginationData} />
+            <Grid justify="center">
+              <Pagination onNextClick={handleNextClick} onPrevClick={handlePrevClick} paginationData={paginationData} />
+            </Grid>
           </>
         )}
 

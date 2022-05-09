@@ -22,10 +22,11 @@ const Search = (props: ISearchProps): JSX.Element => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('');
   const { onButtonClick, onClearClick } = props;
-  const handleSubmit = ():void => {
+  const handleSubmit = (): void => {
     const query = { input: searchTerm, category: selectedCategory || 'name' };
     onButtonClick(query);
   };
+
   const handleClear = (): void => {
     setSearchTerm('');
     setSelectedCategory('');
@@ -34,10 +35,23 @@ const Search = (props: ISearchProps): JSX.Element => {
 
   return (
     <div className="search__form">
-      <InputField type="text" name="query" defaultValue={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} placeholder="Otsi" />
-      <Select value={selectedCategory} options={FILTER_OPTIONS} name="category" label="category" hideLabel onChange={(e) => setSelectedCategory(e.target.value)} />
-      <Button purpose="primary" type="submit" onClick={handleSubmit}>Otsi</Button>
+      <InputField
+        type="text"
+        name="query"
+        defaultValue={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
+        placeholder="Otsi"
+      />
+      <Select
+        value={selectedCategory}
+        options={FILTER_OPTIONS}
+        name="category"
+        label="category"
+        hideLabel
+        onChange={(e) => setSelectedCategory(e.target.value)}
+      />
       <Button purpose="delete" type="submit" onClick={handleClear}>Tühjenda</Button>
+      <Button purpose="primary" type="submit" onClick={handleSubmit}>Otsi</Button>
     </div>
   );
 };
