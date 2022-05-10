@@ -33,7 +33,7 @@ const App = (): JSX.Element => {
   if (isLoggedIn) {
     return (
       <BrowserRouter>
-        <div className="App">
+        <div className="app">
           <Header />
           <Routes>
             <Route path="/" element={<HomePage />} />

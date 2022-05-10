@@ -39,6 +39,7 @@ services:
        args:
         - BASE_URL=${BASE_URL}
         - GOOGLE_CLIENT_ID=${GOOGLE_CLIENT_ID}
+        - REACT_APP_GA_TOKEN=${REACT_APP_GA_TOKEN}
     image: "frontend:1.0.0"    
     networks:
       -  my-network
