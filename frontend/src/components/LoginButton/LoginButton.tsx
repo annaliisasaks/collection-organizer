@@ -11,7 +11,7 @@ const LoginButton = (): JSX.Element => {
     if (!('tokenId' in response)) {
       return;
     }
-    api.post(`${process.env.REACT_APP_API_BASE_URL}/auth/google`, { token: response.tokenId })
+    api.post('/auth/google', { token: response.tokenId })
       .then((tokenResponse: AxiosResponse<{ newJwt: string }>) => {
         if (tokenResponse.data?.newJwt) {
           setAuthroizationHeader(tokenResponse.data.newJwt);
