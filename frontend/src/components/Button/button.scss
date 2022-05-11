@@ -12,7 +12,7 @@
     &--primary {
         background: white;
         &:hover {
-            opacity: 90%;
+            background: lighten(grey, 35%)
         }
     }
     &--secondary {
