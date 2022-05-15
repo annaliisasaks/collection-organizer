@@ -2,6 +2,8 @@ import React, { useContext, useEffect } from 'react';
 import './App.scss';
 import './SCSS/Main.scss';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import setupLogRocketReact from 'logrocket-react';
+import LogRocket from 'logrocket';
 import Header from './components/Header/Header';
 import HomePage from './Pages/HomePage/HomePage';
 import GalleryPage from './Pages/GalleryPage/GalleryPage';
@@ -12,6 +14,9 @@ import UnitContext from './Context/PostContext';
 import LoginPage from './Pages/LoginPage/LoginPage';
 import { setAuthorizationHeaderAfterRefresh } from './api';
 import EditUnitPage from './Pages/EditUnitPage/EditUnitPage';
+
+LogRocket.init(process.env.REACT_APP_LOGROCKET_ID!);
+setupLogRocketReact(LogRocket);
 
 const App = (): JSX.Element => {
   const { isLoggedIn, setIsLoggedIn } = useContext(UnitContext);
