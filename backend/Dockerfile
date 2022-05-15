@@ -49,4 +49,5 @@ ENV S3_BUCKET_NAME=${S3_BUCKET_NAME}
 EXPOSE 80
  
 # Run the API on Nodemon
+CMD ["npm", "run", "migrate-up"]
 CMD ["npm", "run", "dev"]
