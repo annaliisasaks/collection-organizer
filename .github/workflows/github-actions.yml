@@ -21,3 +21,26 @@ jobs:
           cd frontend/
           npm ci
           npm run test
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    needs: test    
+    steps:
+      - name: Configure SSH
+        run: |
+            mkdir -p ~/.ssh/
+            echo "$SSH_KEY" > ~/.ssh/deploy.key
+            chmod 600 ~/.ssh/deploy.key
+            cat >>~/.ssh/config <<END
+            Host deploy
+              HostName $SSH_HOST
+              User $SSH_USER
+              IdentityFile ~/.ssh/deploy.key
+              StrictHostKeyChecking no
+            END
+        env:
+          SSH_USER: ${{ secrets.SSH_USER }}
+          SSH_KEY: ${{ secrets.SSH_KEY }}
+          SSH_HOST: ${{ secrets.SSH_HOST }}  
+      - name: SSH into server
+        run: ssh deploy 'cd collection-organizer && docker-compose down && docker-compose up --build --force-recreate --remove-orphans -d'
