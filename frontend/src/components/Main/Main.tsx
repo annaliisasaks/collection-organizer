@@ -58,6 +58,7 @@ const Main = (): JSX.Element => {
   };
   useEffect(() => {
     getUnits();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleNextClick = (): void => {

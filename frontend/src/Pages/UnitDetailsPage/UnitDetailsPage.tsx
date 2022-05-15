@@ -38,6 +38,7 @@ const UnitDetailsPage = ():JSX.Element => {
     if (id) {
       getUnitById(id);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
   const selectedUnit = units.find((unit) => unit._id === id);

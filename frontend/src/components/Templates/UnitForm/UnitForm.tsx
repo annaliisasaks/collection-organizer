@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState } from 'react';
 import Button from '../../Button/Button';
 import Grid from '../../Grid/Grid';
