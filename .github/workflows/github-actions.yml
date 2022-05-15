@@ -41,6 +41,10 @@ jobs:
         env:
           SSH_USER: ${{ secrets.SSH_USER }}
           SSH_KEY: ${{ secrets.SSH_KEY }}
-          SSH_HOST: ${{ secrets.SSH_HOST }}  
-      - name: SSH into server
-        run: ssh deploy 'cd collection-organizer && docker-compose down && docker-compose up --build --force-recreate --remove-orphans -d'
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+      - name: Fetch repo
+        run: ssh deploy 'cd collection-organizer && git fetch && git reset --hard origin/main'    
+      - name: Pull down old docker
+        run: ssh deploy 'cd collection-organizer && docker-compose down'
+      - name: Put up new docker
+        run: ssh deploy 'cd collection-organizer && docker-compose up --build --force-recreate --remove-orphans -d'  
