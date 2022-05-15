@@ -1,0 +1,12 @@
+name: Deployment action
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  Test-job:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Testing actions"
+      - run: echo "Job status ${{ job.status }}"
