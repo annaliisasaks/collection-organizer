@@ -64,7 +64,7 @@ const UnitTable = (props: IUnitTableProps): JSX.Element => {
                 <TableData>
                   {coverImage
                     ? <Image src={coverImage.imageUrl} alt={unit.name} size="tiny" />
-                    : unit.images && <Image src={unit.images[0].imageUrl} alt={unit.name} size="tiny" />}
+                    : unit.images[0] && <Image src={unit.images[0].imageUrl} alt={unit.name} size="tiny" />}
                 </TableData>
                 <TableData>
                   {unit.name}
