@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import GoogleLogin, { GoogleLoginResponse, GoogleLoginResponseOffline } from 'react-google-login';
 import { AxiosResponse } from 'axios';
-import UnitContext from '../../Context/PostContext';
+import UnitContext from '../../Context/AppContext';
 import api, { setAuthroizationHeader, removeAuthorizationHeader } from '../../api';
 
 const LoginButton = (): JSX.Element => {

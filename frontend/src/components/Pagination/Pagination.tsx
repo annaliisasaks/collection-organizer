@@ -1,5 +1,5 @@
 import React from 'react';
-import { IInitialPaginationData } from '../../Context/PostContext';
+import { IInitialPaginationData } from '../../Context/AppContext';
 import Button from '../Button/Button';
 import './pagination.scss';
 

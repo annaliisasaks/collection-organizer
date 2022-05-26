@@ -2,7 +2,7 @@ import React, {
   useContext, useEffect, useState,
 } from 'react';
 import './check.scss';
-import UnitContext from '../../Context/PostContext';
+import UnitContext from '../../Context/AppContext';
 
 interface ICheckProps {
   id: string;

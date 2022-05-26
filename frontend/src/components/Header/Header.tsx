@@ -4,7 +4,7 @@ import NavBarItem from './Navbar/NavBarItem';
 
 import './header.scss';
 import Button from '../Button/Button';
-import UnitContext from '../../Context/PostContext';
+import UnitContext from '../../Context/AppContext';
 
 import { removeAuthorizationHeader } from '../../api';
 

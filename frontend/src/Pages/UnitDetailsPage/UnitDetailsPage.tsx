@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { AxiosResponse } from 'axios';
-import { IUnit, UnitContext } from '../../Context/PostContext';
+import { IUnit, UnitContext } from '../../Context/AppContext';
 import Button from '../../components/Button/Button';
 import Content from '../../components/Content/Content';
 import Card from '../../components/Card/Card';

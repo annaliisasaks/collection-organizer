@@ -7,7 +7,7 @@ import Card from '../../components/Card/Card';
 import Content from '../../components/Content/Content';
 import {
   IGalleryItem, IInitialPaginationData, initialPaginationData, IPagaintionParams, IPaginationWrapper,
-} from '../../Context/PostContext';
+} from '../../Context/AppContext';
 import Grid from '../../components/Grid/Grid';
 import GridColumn from '../../components/Grid/GridColumn';
 import './galleryPage.scss';

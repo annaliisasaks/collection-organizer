@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router';
 import { AxiosResponse } from 'axios';
 import Content from '../../components/Content/Content';
-import PostContext, { IUnit } from '../../Context/PostContext';
+import UnitContext, { IUnit } from '../../Context/AppContext';
 import './addUnitPage.scss';
 import Card from '../../components/Card/Card';
 import UnitForm, { IUnitFormFields } from '../../components/Templates/UnitForm/UnitForm';
@@ -10,7 +10,7 @@ import API from '../../api';
 
 const AddUnitPage = (): JSX.Element => {
   const [isLoading, setIsLoading] = useState(false);
-  const { addUnit } = useContext(PostContext);
+  const { addUnit } = useContext(UnitContext);
   const navigate = useNavigate();
   const onSave = (unit: IUnitFormFields): void => {
     const formData = new FormData();

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { IUnit } from '../../../Context/PostContext';
+import { IUnit } from '../../../Context/AppContext';
 import Check from '../../Check/Check';
 import Image from '../../Image/Image';
 import Table from '../../Table/Table';

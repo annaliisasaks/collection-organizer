@@ -5,7 +5,7 @@ import Grid from '../../components/Grid/Grid';
 import GridColumn from '../../components/Grid/GridColumn';
 import Image from '../../components/Image/Image';
 import Separator from '../../components/Separator/Separator';
-import UnitContext from '../../Context/PostContext';
+import UnitContext from '../../Context/AppContext';
 
 const ComparePage = ():JSX.Element => {
   const { compare } = useContext(UnitContext);

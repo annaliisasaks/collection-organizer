@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import UnitContext from '../../../Context/PostContext';
+import UnitContext from '../../../Context/AppContext';
 import ListItem from '../../List/ListItem';
 import './navBarItem.scss';
 

@@ -5,7 +5,7 @@ import API from '../../api';
 import Card from '../../components/Card/Card';
 import Content from '../../components/Content/Content';
 import UnitForm, { IUnitFormFields } from '../../components/Templates/UnitForm/UnitForm';
-import UnitContext, { IUnit } from '../../Context/PostContext';
+import UnitContext, { IUnit } from '../../Context/AppContext';
 
 const EditUnitPage = ():JSX.Element => {
   const { units, editUnit } = useContext(UnitContext);

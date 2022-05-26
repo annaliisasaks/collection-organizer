@@ -10,7 +10,7 @@ import GalleryPage from './Pages/GalleryPage/GalleryPage';
 import AddUnitPage from './Pages/AddUnitPage/AddUnitPage';
 import UnitDetailsPage from './Pages/UnitDetailsPage/UnitDetailsPage';
 import ComparePage from './Pages/ComparePage/ComparePage';
-import UnitContext from './Context/PostContext';
+import UnitContext from './Context/AppContext';
 import LoginPage from './Pages/LoginPage/LoginPage';
 import { setAuthorizationHeaderAfterRefresh } from './api';
 import EditUnitPage from './Pages/EditUnitPage/EditUnitPage';

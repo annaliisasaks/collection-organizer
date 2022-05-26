@@ -8,7 +8,7 @@ import Loader from '../../Loader/Loader';
 import Separator from '../../Separator/Separator';
 import './unitForm.scss';
 import Image from '../../Image/Image';
-import { IImage, IUnit } from '../../../Context/PostContext';
+import { IImage, IUnit } from '../../../Context/AppContext';
 import GridColumn from '../../Grid/GridColumn';
 
 interface IUnitFormProps {
