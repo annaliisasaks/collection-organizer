@@ -1,11 +1,11 @@
 .list--horizontal {
-    display:flex;
-    flex-direction:row;
+    display: flex;
+    flex-direction: row;
 }
 
 .list--vertical {
-  display:flex;
-  flex-direction:column;
+  display: flex;
+  flex-direction: column;
 }
 
 .list--full-width {
@@ -15,22 +15,4 @@
 
 .list__item {
   list-style-type: none;
-
-  &::before {
-    color: #696969; 
-  }
-
-  .list--bullets > &:not(:first-child)::before {
-    content:"•";
-    margin: 0 10px;
-  }
-
-  .list--hashtags > &::before {
-    content:"#";
-    margin-left: 10px;
-  }
-
-  .list--hashtags > &:first-child::before {
-    margin-left: 0;
-  }
 }

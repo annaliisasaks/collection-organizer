@@ -5,7 +5,7 @@ import ListItem from '../../List/ListItem';
 import './navBarItem.scss';
 
 interface INavBarItemProps {
-    navLink:{name: string, path:string};
+    navLink: {name: string, path:string};
     isActive?: boolean;
     onClick: (e: string) => void;
     showCompareCount?: boolean;

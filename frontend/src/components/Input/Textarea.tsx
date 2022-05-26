@@ -1,18 +1,18 @@
 import React from 'react';
 import './textarea.scss';
 
-interface Props {
-  className?:string,
-  name:string,
+interface ITextareaProps {
+  className?: string,
+  name: string,
   onChange?: (e: React.ChangeEvent<HTMLTextAreaElement>) => void,
   defaultValue?: string,
-  placeholder?:string,
+  placeholder?: string,
   rows: number,
   cols: number,
   required?: boolean,
 }
 
-const Textarea = (props: Props):JSX.Element => {
+const Textarea = (props: ITextareaProps): JSX.Element => {
   const {
     className, defaultValue, ...rest
   } = props;

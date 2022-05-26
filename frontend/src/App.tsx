@@ -16,8 +16,8 @@ import { setAuthorizationHeaderAfterRefresh } from './api';
 import EditUnitPage from './Pages/EditUnitPage/EditUnitPage';
 
 // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-LogRocket.init(process.env.REACT_APP_LOGROCKET_ID!);
-setupLogRocketReact(LogRocket);
+// LogRocket.init(process.env.REACT_APP_LOGROCKET_ID!);
+// setupLogRocketReact(LogRocket);
 
 const App = (): JSX.Element => {
   const { isLoggedIn, setIsLoggedIn } = useContext(UnitContext);

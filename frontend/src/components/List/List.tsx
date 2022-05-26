@@ -5,13 +5,12 @@ interface Props {
   children: React.ReactNode
   className?: string;
   direction?:'horizontal';
-  type?: 'bullets' | 'hashtags';
   fullWidth?: boolean;
 }
 
 const List = (props: Props):JSX.Element => {
   const {
-    children, className, direction, type, fullWidth,
+    children, className, direction, fullWidth,
   } = props;
 
   const BEM = (): string => {
@@ -19,9 +18,6 @@ const List = (props: Props):JSX.Element => {
 
     if (direction) {
       classArray.push(`list--${direction}`);
-    }
-    if (type) {
-      classArray.push(`list--${type}`);
     }
 
     if (fullWidth) {

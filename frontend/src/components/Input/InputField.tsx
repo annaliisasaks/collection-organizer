@@ -1,8 +1,8 @@
 import React from 'react';
 import './inputField.scss';
 
-interface Props {
-  className?:string,
+interface IInputProps {
+  className?: string,
   type: 'text' | 'number' | 'file',
   name: string,
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void,
@@ -12,7 +12,7 @@ interface Props {
   multiple?: boolean,
 }
 
-const InputField = (props: Props): JSX.Element => {
+const InputField = (props: IInputProps): JSX.Element => {
   const {
     className, onChange, defaultValue, multiple, ...rest
   } = props;
